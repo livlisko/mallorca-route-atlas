@@ -2,6 +2,8 @@
 
 An interactive roadbook for a six-stage Mallorca cycling camp, covering 18–23 October 2026.
 
+[Open the live Mallorca Route Atlas](https://livlisko.github.io/mallorca-route-atlas/)
+
 ## What is inside
 
 - Six clickable stage dossiers
