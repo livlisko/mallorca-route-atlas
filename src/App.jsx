@@ -452,8 +452,8 @@ export function App() {
               <h2 id="stage-atlas-title">The week, mapped</h2>
             </div>
             <p>
-              Each stage now keeps its route map, ride details, and elevation line together. Tap a row
-              for the full briefing, climb data, and verified links.
+              Route map, ride details, and elevation line travel together. Tap a row for the full
+              briefing, climb data, and verified links.
             </p>
           </div>
           <div className="stage-list">
