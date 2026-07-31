@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+
+# Local design-process artifacts; the production assets remain in public/.
+qa/
+design-qa.md
