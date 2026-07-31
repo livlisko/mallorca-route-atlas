@@ -14,3 +14,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Preserve its warm paper, cartographic editorial feel, central island overview, route-card composition, red route accents, and yellow elevation profiles.
 - The app's main job is to let the rider open a stage, inspect its route and profile, understand every notable climb, and follow verified official or clearly labeled public-preview links.
 - Keep stages in ride-date order while retaining official stage numbers: 1, 2, 3, 4, 6, 5.
+- Present each route map, stage summary, and elevation profile as one clickable stage row; do not split them into parallel map and week sections.

@@ -57,27 +57,6 @@ function ExternalLink({ href, children, className = "text-link", download = fals
   );
 }
 
-function RouteCard({ stage, index, onOpen }) {
-  return (
-    <button
-      className={`route-card route-card--${index + 1}`}
-      type="button"
-      onClick={() => onOpen(stage)}
-      aria-label={`Open Stage ${stage.stageNumber}: ${stage.title}`}
-    >
-      <span className="route-card__image-wrap">
-        <img src={stage.map} alt="" className="route-card__image" />
-        <span className="route-card__number">{stage.stageNumber}</span>
-        <span className="route-card__date">{stage.date}</span>
-      </span>
-      <span className="route-card__caption">
-        <span>{stage.title}</span>
-        <ArrowRight aria-hidden="true" size={17} weight="bold" />
-      </span>
-    </button>
-  );
-}
-
 function StageRow({ stage, onOpen }) {
   return (
     <article className="stage-row" id={`stage-row-${stage.id}`}>
@@ -96,6 +75,13 @@ function StageRow({ stage, onOpen }) {
             {stage.difficulty}
           </span>
           <em>{stage.motivation}</em>
+        </span>
+        <span className="stage-row__map-wrap">
+          <img
+            src={stage.map}
+            alt={`Official route map for Stage ${stage.stageNumber}, ${stage.title}`}
+            className="stage-row__map"
+          />
         </span>
         <span className="stage-row__profile-wrap">
           <img
@@ -413,8 +399,7 @@ export function App() {
           Route Atlas
         </a>
         <div className="topbar__links">
-          <a href="#atlas">Island map</a>
-          <a href="#stages">The week</a>
+          <a href="#stages">Stages</a>
           <a href="#sources">Sources</a>
         </div>
       </nav>
@@ -454,43 +439,21 @@ export function App() {
               operational route files.
             </span>
           </div>
-          <a className="scroll-cue" href="#atlas">
-            Explore the island
+          <a className="scroll-cue" href="#stages">
+            Explore the stages
             <ArrowDown aria-hidden="true" size={18} weight="bold" />
           </a>
         </header>
 
-        <section className="atlas-section" id="atlas" aria-labelledby="atlas-title">
-          <div className="section-heading atlas-section__heading">
-            <div>
-              <span className="eyebrow">Six routes · one island</span>
-              <h2 id="atlas-title">Choose a stage on the map</h2>
-            </div>
-            <p>Tap any route card to open its briefing, profile, climb data, and verified links.</p>
-          </div>
-          <div className="atlas-board">
-            <img
-              className="atlas-board__island"
-              src={`${import.meta.env.BASE_URL}assets/mallorca-topographic-map.png`}
-              alt="Topographic overview of Mallorca"
-            />
-            <div className="atlas-board__cards">
-              {stages.map((stage, index) => (
-                <RouteCard key={stage.id} stage={stage} index={index} onOpen={openStage} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="week-section" id="stages" aria-labelledby="week-title">
+        <section className="stage-atlas-section" id="stages" aria-labelledby="stage-atlas-title">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">18–23 October 2026</span>
-              <h2 id="week-title">The week in six lines</h2>
+              <span className="eyebrow">Six routes · 18–23 October 2026</span>
+              <h2 id="stage-atlas-title">The week, mapped</h2>
             </div>
             <p>
-              Official stage numbers stay intact, even though Sa Calobra runs before Formentor on this
-              camp’s schedule.
+              Each stage now keeps its route map, ride details, and elevation line together. Tap a row
+              for the full briefing, climb data, and verified links.
             </p>
           </div>
           <div className="stage-list">
