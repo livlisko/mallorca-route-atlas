@@ -10,7 +10,7 @@ export const stages = [
     elevation: "1,024 m",
     duration: "3:30",
     difficulty: "Intermediate",
-    motivation: "Start strong.",
+    rideKey: "FTP test · Sa Batalla",
     routeLine: "Pollença · Alcúdia Bay · Santa Magdalena · Sa Batalla · Lluc · Pollença",
     briefing:
       "The week opens with a coastal rollout and quiet roads through the Albufera before the first real tests arrive. Santa Magdalena sharpens the legs; Sa Batalla becomes the camp’s all-in FTP and lactate effort, followed by the flowing Coll de Femenia descent home.",
@@ -62,7 +62,7 @@ export const stages = [
     elevation: "1,290 m",
     duration: "4:00",
     difficulty: "Intermediate",
-    motivation: "Climb steadily.",
+    rideKey: "Threshold climbing + summit finish",
     routeLine: "Pollença · Sineu · Randa · Porreres · Sant Salvador, Felanitx",
     briefing:
       "The first true endurance day follows quiet southern lanes across Mallorca’s farmland. Randa rewards disciplined threshold pacing, then Sant Salvador delivers a steep, exposed summit finish where the bikes go into the support van and every last match can be spent.",
@@ -107,7 +107,7 @@ export const stages = [
     elevation: "2,349 m",
     duration: "5:30",
     difficulty: "Difficult",
-    motivation: "Earn it all.",
+    rideKey: "5 climbs · Puig Major HC finale",
     routeLine: "Pollença · Tofla · Orient · Honor · Sóller · Puig Major · Lluc · Pollença",
     briefing:
       "Five climbs accumulate before the week’s only hors catégorie ascent. The terrain keeps asking questions through Orient and Sóller, then Puig Major becomes a long final commitment—with an optional mostly downhill victory lap back to Pollença.",
@@ -173,7 +173,7 @@ export const stages = [
     elevation: "620 m",
     duration: "2:45",
     difficulty: "Easy",
-    motivation: "Spin, smile, sip.",
+    rideKey: "Active recovery · coffee + cake",
     routeLine: "Pollença · Sa Pobla · Inca · Cycling Planet, Alaró · Pollença",
     briefing:
       "The lightest day keeps the legs moving without another mountain battle. Smooth group miles lead to coffee and cake at Cycling Planet in Alaró, before rolling roads encourage a steady, social tempo back to Pollença.",
@@ -203,7 +203,7 @@ export const stages = [
     elevation: "1,962 m",
     duration: "4:30",
     difficulty: "Difficult",
-    motivation: "Climb the coast.",
+    rideKey: "KOM challenge · Sa Calobra time trial",
     routeLine: "Pollença · Femenia · Lluc · Coll dels Reis · Sa Calobra · Pollença",
     briefing:
       "Three Tramuntana approaches prime the legs before the road tips down through Sa Calobra’s famous hairpins. At the coast, the group turns around for a staggered-start time trial back up one of cycling’s great roads.",
@@ -269,7 +269,7 @@ export const stages = [
     elevation: "1,550 m",
     duration: "4:30",
     difficulty: "Intermediate",
-    motivation: "Finish on the point.",
+    rideKey: "Green-jersey sprint · 20% final sting",
     routeLine: "Pollença · Albercutx · Formentor lighthouse · Victoria · Puig Maria",
     briefing:
       "Cycling Disneyland starts with the hidden road to Albercutx, then follows cliff roads and turquoise coves to the lighthouse. A green-jersey sprint, the narrow ramps of Victoria, and Puig Maria’s 20% sting make the final day anything but ceremonial.",

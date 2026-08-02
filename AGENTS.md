@@ -16,5 +16,6 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep stages in ride-date order while retaining official stage numbers: 1, 2, 3, 4, 6, 5.
 - Present each route map, stage summary, and elevation profile as one clickable stage row; do not split them into parallel map and week sections.
 - Keep the official metric totals primary and show miles and feet as a subtle imperial footnote for every stage.
+- Make each stage's decisive ride-specific fact visible in the homepage row at first glance; do not bury FTP tests, summit finishes, recovery intent, challenges, or sprints inside the detail dialog.
 - Use the supplied Portal screenshots as the current visual direction: immersive scenic hero, elegant editorial serif headlines, soft cream framed windows, and generous rounded surfaces.
 - Keep the palette grounded in the supplied Mallorca photos: dominant Mediterranean cobalt/azure, lagoon turquoise and glassy aqua, cypress/pine/olive greens, limestone cream, restrained terracotta, and citrus yellow. Avoid purple, lilac, magenta, pink sunsets, and bougainvillea pink as dominant tones.

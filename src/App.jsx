@@ -88,6 +88,10 @@ function StageRow({ stage, onOpen }) {
           <span className="eyebrow">{stage.date}</span>
           <strong>Stage {stage.stageNumber}</strong>
           <span className="stage-row__title">{stage.title}</span>
+          <span className="stage-row__key-fact">
+            <span className="stage-row__key-fact-label">Ride key</span>
+            <strong>{stage.rideKey}</strong>
+          </span>
           <span className="stage-row__metrics">
             {stage.distance} <i aria-hidden="true" /> {stage.elevation} <i aria-hidden="true" /> {stage.duration}
           </span>
@@ -95,7 +99,6 @@ function StageRow({ stage, onOpen }) {
           <span className={`difficulty difficulty--${stage.difficulty.toLowerCase()}`}>
             {stage.difficulty}
           </span>
-          <em>{stage.motivation}</em>
         </span>
         <span className="stage-row__map-wrap">
           <img
