@@ -15,3 +15,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The app's main job is to let the rider open a stage, inspect its route and profile, understand every notable climb, and follow verified official or clearly labeled public-preview links.
 - Keep stages in ride-date order while retaining official stage numbers: 1, 2, 3, 4, 6, 5.
 - Present each route map, stage summary, and elevation profile as one clickable stage row; do not split them into parallel map and week sections.
+- Keep the official metric totals primary and show miles and feet as a subtle imperial footnote for every stage.

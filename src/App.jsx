@@ -23,6 +23,17 @@ const tabs = [
   { id: "climbs", label: "Climbs" },
 ];
 
+const feetFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+function getImperialFootnote(stage) {
+  const kilometers = Number.parseFloat(stage.distance.replace(/[^\d.]/g, ""));
+  const meters = Number.parseFloat(stage.elevation.replace(/[^\d.]/g, ""));
+  const miles = (kilometers * 0.621371).toFixed(1);
+  const feet = feetFormatter.format(meters * 3.28084);
+
+  return `≈ ${miles} mi · ${feet} ft climbing`;
+}
+
 function getStageFromHash() {
   const match = window.location.hash.match(/^#stage-(\d)$/);
   if (!match) return null;
@@ -58,6 +69,8 @@ function ExternalLink({ href, children, className = "text-link", download = fals
 }
 
 function StageRow({ stage, onOpen }) {
+  const imperialFootnote = getImperialFootnote(stage);
+
   return (
     <article className="stage-row" id={`stage-row-${stage.id}`}>
       <button className="stage-row__trigger" type="button" onClick={() => onOpen(stage)}>
@@ -71,6 +84,7 @@ function StageRow({ stage, onOpen }) {
           <span className="stage-row__metrics">
             {stage.distance} <i aria-hidden="true" /> {stage.elevation} <i aria-hidden="true" /> {stage.duration}
           </span>
+          <span className="stage-row__imperial">Imperial · {imperialFootnote}</span>
           <span className={`difficulty difficulty--${stage.difficulty.toLowerCase()}`}>
             {stage.difficulty}
           </span>
@@ -256,6 +270,7 @@ function StageDialog({ stage, onClose }) {
   const [activeTab, setActiveTab] = useState("briefing");
   const closeRef = useRef(null);
   const dialogRef = useRef(null);
+  const imperialFootnote = getImperialFootnote(stage);
 
   useEffect(() => {
     setActiveTab("briefing");
@@ -318,6 +333,7 @@ function StageDialog({ stage, onClose }) {
             <Metric icon={RoadHorizon}>{stage.distance}</Metric>
             <Metric icon={Mountains}>{stage.elevation}</Metric>
             <Metric icon={Clock}>{stage.duration}</Metric>
+            <span className="stage-dialog__imperial">Imperial · {imperialFootnote}</span>
           </div>
           <button
             className="icon-button"

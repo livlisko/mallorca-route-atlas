@@ -438,6 +438,17 @@ img {
   background: currentColor;
 }
 
+.stage-row__imperial {
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
 .difficulty {
   display: inline-flex;
   margin-top: 8px;
@@ -657,7 +668,21 @@ img {
 
 .stage-dialog__metrics {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 18px;
+}
+
+.stage-dialog__imperial {
+  flex: 0 0 100%;
+  color: var(--muted);
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1;
+  text-align: right;
+  text-transform: uppercase;
 }
 
 .metric {
@@ -1098,6 +1123,11 @@ img {
   .stage-dialog__metrics {
     grid-column: 1 / -1;
     grid-row: 2;
+    justify-content: flex-start;
+  }
+
+  .stage-dialog__imperial {
+    text-align: left;
   }
 
   .icon-button {
