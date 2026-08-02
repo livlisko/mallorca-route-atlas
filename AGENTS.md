@@ -17,4 +17,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Present each route map, stage summary, and elevation profile as one clickable stage row; do not split them into parallel map and week sections.
 - Keep the official metric totals primary and show miles and feet as a subtle imperial footnote for every stage.
 - Use the supplied Portal screenshots as the current visual direction: immersive scenic hero, elegant editorial serif headlines, soft cream framed windows, and generous rounded surfaces.
-- Keep the palette Mallorca-specific: Mediterranean cobalt and turquoise, limestone cream, terracotta sunset, bougainvillea coral, citrus yellow, and olive accents.
+- Keep the palette grounded in the supplied Mallorca photos: dominant Mediterranean cobalt/azure, lagoon turquoise and glassy aqua, cypress/pine/olive greens, limestone cream, restrained terracotta, and citrus yellow. Avoid purple, lilac, magenta, pink sunsets, and bougainvillea pink as dominant tones.
