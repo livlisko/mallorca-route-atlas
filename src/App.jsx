@@ -17,6 +17,9 @@ import {
 } from "@phosphor-icons/react";
 import { stages, weekTotals } from "./stageData.js";
 
+const heroDesktopUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramuntana-dreamscape.webp`;
+const heroMobileUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
+
 const tabs = [
   { id: "briefing", label: "Briefing" },
   { id: "route", label: "Route + profile" },
@@ -73,7 +76,11 @@ function StageRow({ stage, onOpen }) {
 
   return (
     <article className="stage-row" id={`stage-row-${stage.id}`}>
-      <button className="stage-row__trigger" type="button" onClick={() => onOpen(stage)}>
+      <button
+        className="stage-row__trigger"
+        type="button"
+        onClick={(event) => onOpen(stage, event.currentTarget)}
+      >
         <span className="stage-row__timeline" aria-hidden="true">
           <span>{stage.stageNumber}</span>
         </span>
@@ -382,6 +389,7 @@ function StageDialog({ stage, onClose }) {
 
 export function App() {
   const [selectedStage, setSelectedStage] = useState(() => getStageFromHash());
+  const lastStageTriggerRef = useRef(null);
 
   useEffect(() => {
     const handleHash = () => setSelectedStage(getStageFromHash());
@@ -393,11 +401,13 @@ export function App() {
     () => () => {
       window.history.pushState(null, "", `${window.location.pathname}${window.location.search}`);
       setSelectedStage(null);
+      window.requestAnimationFrame(() => lastStageTriggerRef.current?.focus());
     },
     [],
   );
 
-  const openStage = (stage) => {
+  const openStage = (stage, trigger) => {
+    lastStageTriggerRef.current = trigger;
     window.location.hash = `stage-${stage.id}`;
     setSelectedStage(stage);
   };
@@ -409,67 +419,76 @@ export function App() {
           Skip to stages
         </a>
 
-      <nav className="topbar" aria-label="Primary navigation">
-        <a className="wordmark" href="#top" aria-label="Mallorca Route Atlas home">
-          <CompassRose aria-hidden="true" size={22} weight="fill" />
-          Route Atlas
-        </a>
-        <div className="topbar__links">
-          <a href="#stages">Stages</a>
-          <a href="#sources">Sources</a>
-        </div>
-      </nav>
-
-      <main id="top">
-        <header className="masthead">
-          <div className="masthead__title">
-            <span className="kicker">Mallorca camp / route atlas</span>
-            <h1>
-              Mallorca
-              <br />
-              Terrain Atlas
-            </h1>
-            <p>17–24 October 2026 · Pollença</p>
-          </div>
-          <div className="masthead__meta">
-            <CompassRose aria-hidden="true" size={72} weight="thin" />
-            <dl>
-              <div>
-                <dt>Distance</dt>
-                <dd>{weekTotals.distance}</dd>
-              </div>
-              <div>
-                <dt>Elevation</dt>
-                <dd>{weekTotals.elevation}</dd>
-              </div>
-              <div>
-                <dt>Rhythm</dt>
-                <dd>{weekTotals.rideDays}</dd>
-              </div>
-            </dl>
-          </div>
-          <div className="masthead__note">
-            <FlagCheckered aria-hidden="true" size={20} weight="fill" />
+        <nav className="topbar" aria-label="Primary navigation">
+          <a className="wordmark" href="#top" aria-label="Mallorca Route Atlas home">
+            <CompassRose aria-hidden="true" size={24} weight="fill" />
             <span>
-              Final navigation comes from the rider roadbook. Public links here are previews, not the
-              operational route files.
+              <strong>Mallorca</strong>
+              <small>Route atlas</small>
             </span>
-          </div>
-          <a className="scroll-cue" href="#stages">
-            Explore the stages
-            <ArrowDown aria-hidden="true" size={18} weight="bold" />
           </a>
-        </header>
+          <div className="topbar__links">
+            <a href="#stages">Stages</a>
+            <a href="#sources">Sources</a>
+          </div>
+        </nav>
+
+        <main id="top">
+          <header className="masthead">
+            <picture className="masthead__visual" aria-hidden="true">
+              <source media="(max-width: 720px)" srcSet={heroMobileUrl} />
+              <img src={heroDesktopUrl} alt="" />
+            </picture>
+            <span className="masthead__veil" aria-hidden="true" />
+
+            <div className="masthead__title">
+              <span className="kicker">Sa Calobra Cycling Club · Mallorca 2026</span>
+              <h1>
+                Six rides.
+                <span>One unforgettable island.</span>
+              </h1>
+              <p>
+                Maps, profiles, climbs, and every road worth dreaming about—gathered into one
+                motivation atlas for the week ahead.
+              </p>
+              <a className="scroll-cue" href="#stages">
+                Explore the stages
+                <ArrowDown aria-hidden="true" size={19} weight="bold" />
+              </a>
+            </div>
+
+            <div className="masthead__meta" aria-label="Camp totals">
+              <dl>
+                <div>
+                  <dt>Distance</dt>
+                  <dd>{weekTotals.distance}</dd>
+                </div>
+                <div>
+                  <dt>Climbing</dt>
+                  <dd>{weekTotals.elevation}</dd>
+                </div>
+                <div>
+                  <dt>The week</dt>
+                  <dd>{weekTotals.rideDays}</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div className="masthead__note">
+              <FlagCheckered aria-hidden="true" size={18} weight="fill" />
+              <span>17–24 October 2026 · Pollença, Mallorca</span>
+            </div>
+          </header>
 
         <section className="stage-atlas-section" id="stages" aria-labelledby="stage-atlas-title">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">Six routes · 18–23 October 2026</span>
-              <h2 id="stage-atlas-title">The week, mapped</h2>
+              <span className="eyebrow">Six stages · 18–23 October 2026</span>
+              <h2 id="stage-atlas-title">Your week in Mallorca.</h2>
             </div>
             <p>
-              Route map, ride details, and elevation line travel together. Tap a row for the full
-              briefing, climb data, and verified links.
+              Every route map, elevation profile, climb, and verified link travels together. Choose
+              a stage to open the full road briefing.
             </p>
           </div>
           <div className="stage-list">
@@ -482,7 +501,7 @@ export function App() {
         <section className="sources-section" id="sources" aria-labelledby="sources-title">
           <div className="sources-section__intro">
             <span className="eyebrow">Source notes</span>
-            <h2 id="sources-title">Built for motivation. Honest about navigation.</h2>
+            <h2 id="sources-title">Know the road. Keep the mystery.</h2>
           </div>
           <div className="source-columns">
             <div>
