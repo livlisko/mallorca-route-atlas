@@ -19,6 +19,7 @@ import { stages, weekTotals } from "./stageData.js";
 
 const heroDesktopUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramuntana-dreamscape.webp`;
 const heroMobileUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
+const packingPageUrl = `${import.meta.env.BASE_URL}packing/`;
 
 const tabs = [
   { id: "briefing", label: "Briefing" },
@@ -432,6 +433,7 @@ export function App() {
           </a>
           <div className="topbar__links">
             <a href="#stages">Stages</a>
+            <a href={packingPageUrl}>Packing</a>
             <a href="#sources">Sources</a>
           </div>
         </nav>
