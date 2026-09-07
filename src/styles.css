@@ -1709,6 +1709,11 @@ img {
 }
 
 @media (max-width: 430px) {
+  .topbar__links a {
+    padding-inline: 7px;
+    font-size: 13px;
+  }
+
   .masthead {
     padding-inline: 16px;
   }

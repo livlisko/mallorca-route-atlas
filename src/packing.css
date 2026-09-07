@@ -1213,7 +1213,8 @@
 
 @media (max-width: 430px) {
   .packing-page .topbar__links a {
-    padding-inline: 9px;
+    padding-inline: 7px;
+    font-size: 13px;
   }
 
   .packing-cabin__items {

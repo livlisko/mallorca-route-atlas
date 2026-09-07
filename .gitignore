@@ -5,3 +5,14 @@ dist/
 # Local design-process artifacts; the production assets remain in public/.
 qa/
 design-qa.md
+
+# Private itinerary inputs and credentials must never enter this public repository.
+*.private.*
+private-input/
+private-denylist*
+.env
+.env.*
+*.pdf
+*.eml
+*.key
+*.secret

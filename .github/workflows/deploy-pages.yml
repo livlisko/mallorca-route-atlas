@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -32,6 +34,12 @@ jobs:
 
       - name: Build site
         run: npm run build
+
+      - name: Test encrypted itinerary boundary
+        run: npm run test:private
+
+      - name: Test packaged site
+        run: npm run test:sites
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
