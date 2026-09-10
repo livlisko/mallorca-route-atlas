@@ -54,7 +54,7 @@ function Metric({ icon: Icon, children }) {
   );
 }
 
-function ExternalLink({ href, children, className = "text-link", download = false }) {
+function ExternalLink({ href, children, className = "text-link", download = false, ariaLabel }) {
   return (
     <a
       className={className}
@@ -62,6 +62,7 @@ function ExternalLink({ href, children, className = "text-link", download = fals
       target="_blank"
       rel="noreferrer"
       download={download || undefined}
+      aria-label={ariaLabel}
     >
       {children}
       {download ? (
@@ -121,6 +122,7 @@ function StageRow({ stage, onOpen }) {
           </span>
         </span>
       </button>
+      <ClimbsPanel stage={stage} placement="row" />
     </article>
   );
 }
@@ -226,10 +228,13 @@ function RoutePanel({ stage }) {
   );
 }
 
-function ClimbsPanel({ stage }) {
+function ClimbsPanel({ stage, placement = "dialog" }) {
   if (stage.climbs.length === 0) {
     return (
-      <div className="recovery-panel">
+      <div
+        className={`recovery-panel recovery-panel--${placement}`}
+        data-stage-climb-summary={stage.id}
+      >
         <span className="recovery-panel__icon">
           <Bicycle aria-hidden="true" size={42} weight="duotone" />
         </span>
@@ -244,7 +249,10 @@ function ClimbsPanel({ stage }) {
   }
 
   return (
-    <div className="climbs-panel">
+    <div
+      className={`climbs-panel climbs-panel--${placement}`}
+      data-stage-climb-summary={stage.id}
+    >
       <div className="climbs-panel__intro">
         <div>
           <span className="eyebrow">Notable climbs</span>
@@ -252,9 +260,12 @@ function ClimbsPanel({ stage }) {
         </div>
         <p>Every Strava button links to the exact segment published on the official SCCC stage page.</p>
       </div>
-      <div className="climb-list">
+      <div
+        className="climb-list"
+        style={placement === "row" ? { "--climb-count": stage.climbs.length } : undefined}
+      >
         {stage.climbs.map((climb, index) => (
-          <article className="climb-card" key={climb.name}>
+          <article className="climb-card" data-climb-name={climb.name} key={climb.name}>
             <span className="climb-card__index">{String(index + 1).padStart(2, "0")}</span>
             <div className="climb-card__name">
               <span className="category">{climb.category}</span>
@@ -268,7 +279,11 @@ function ClimbsPanel({ stage }) {
               <span>Average</span>
               <strong>{climb.gradient}</strong>
             </div>
-            <ExternalLink href={climb.strava} className="strava-link">
+            <ExternalLink
+              href={climb.strava}
+              className="strava-link"
+              ariaLabel={`View ${climb.name} on Strava`}
+            >
               View on Strava
             </ExternalLink>
           </article>

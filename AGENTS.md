@@ -17,7 +17,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Present each route map, stage summary, and elevation profile as one clickable stage row; do not split them into parallel map and week sections.
 - Keep the official metric totals primary and show miles and feet as a subtle imperial footnote for every stage.
 - Make each stage's decisive ride-specific fact visible in the homepage row at first glance; do not bury FTP tests, summit finishes, recovery intent, challenges, or sprints inside the detail dialog.
-- Keep packing guidance on its own `/packing/` page, sourced from the exact SCCC camp and packing guidance; the homepage stage breakout must remain unchanged apart from the navigation link needed to reach it.
+- Surface every notable climb in its homepage stage row from the same `stage.climbs` data used by the detail dialog, including category, length, average grade, and direct Strava link; explicitly preserve the recovery day's no-major-climbs state.
+- Keep packing guidance on its own `/packing/` page, sourced from the exact SCCC camp and packing guidance; do not fold packing content into the homepage stage breakout.
 - Keep personal travel details on the isolated `/itinerary/` page as AES-256-GCM ciphertext only. Never commit readable itinerary data, source confirmations, local file paths, unlock codes, names, email addresses, payment details, or travel-document identifiers to this public repository or build output.
 - Treat the itinerary unlock as local decryption, not server authentication: use a unique high-entropy code, retain decrypted data in memory only, auto-lock it, provide no persistence/export shortcuts, and describe the limitation honestly.
 - Before any itinerary publish, run `npm run privacy:scan:release` with `PRIVATE_ITINERARY_DENYLIST` pointing to an ignored file outside the repository; never rely on post-push CI as the first privacy check.
