@@ -132,7 +132,14 @@ function BriefingPanel({ stage }) {
     <div className="detail-grid detail-grid--briefing">
       <div className="detail-copy">
         <span className="eyebrow">Ride overview</span>
-        <p className="detail-quote">“{stage.briefing}”</p>
+        <p className="detail-overview">{stage.briefing}</p>
+        <p className="briefing-source-note">
+          Written for this atlas by Codex, summarizing{" "}
+          <ExternalLink href={stage.officialUrl} className="briefing-source-link">
+            SCCC’s Stage {stage.stageNumber} description
+          </ExternalLink>
+          . Not a direct quote or rider-roadbook excerpt.
+        </p>
       </div>
       <div className="fact-panel">
         <span className="fact-panel__icon">
@@ -141,6 +148,13 @@ function BriefingPanel({ stage }) {
         <div>
           <span className="eyebrow">Route</span>
           <p>{stage.routeLine}</p>
+          <p className="briefing-source-note">
+            Atlas route summary based on{" "}
+            <ExternalLink href={stage.officialUrl} className="briefing-source-link">
+              SCCC’s Stage {stage.stageNumber} page and map
+            </ExternalLink>
+            .
+          </p>
         </div>
       </div>
       <div className="fact-panel fact-panel--yellow">
@@ -150,6 +164,13 @@ function BriefingPanel({ stage }) {
         <div>
           <span className="eyebrow">Effort & pacing</span>
           <p>{stage.effort}</p>
+          <p className="briefing-source-note">
+            Codex’s pacing suggestion, informed by{" "}
+            <ExternalLink href={stage.officialUrl} className="briefing-source-link">
+              SCCC’s Stage {stage.stageNumber} description
+            </ExternalLink>
+            . Not official coaching or roadbook text; follow your camp coach’s instructions.
+          </p>
         </div>
       </div>
       <div className="detail-actions">

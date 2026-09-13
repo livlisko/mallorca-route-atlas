@@ -929,7 +929,7 @@ img {
   background: var(--surface);
 }
 
-.detail-quote {
+.detail-overview {
   margin: 15px 0 0;
   font-family: "Newsreader", Georgia, serif;
   font-size: clamp(25px, 3vw, 37px);
@@ -963,6 +963,29 @@ img {
   margin: 6px 0 0;
   font-size: 17px;
   line-height: 1.45;
+}
+
+.detail-copy .briefing-source-note,
+.fact-panel .briefing-source-note {
+  margin: 16px 0 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.briefing-source-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.briefing-source-link svg {
+  display: inline;
+  width: 13px;
+  height: 13px;
+  margin-left: 3px;
+  vertical-align: -1px;
 }
 
 .detail-actions {

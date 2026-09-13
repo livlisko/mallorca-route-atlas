@@ -108,9 +108,9 @@ export const stages = [
     duration: "5:30",
     difficulty: "Difficult",
     rideKey: "5 climbs · Puig Major HC finale",
-    routeLine: "Pollença · Tofla · Orient · Honor · Sóller · Puig Major · Lluc · Pollença",
+    routeLine: "Pollença · Tofla · Orient · Honor · Sóller · Puig Major · optional return via Lluc to Pollença",
     briefing:
-      "Five climbs accumulate before the week’s only hors catégorie ascent. The terrain keeps asking questions through Orient and Sóller, then Puig Major becomes a long final commitment—with an optional mostly downhill victory lap back to Pollença.",
+      "Four climbs build toward Puig Major, the fifth climb of the day and the week’s only hors catégorie ascent. The terrain keeps asking questions through Orient and Sóller, then Puig Major becomes a long final commitment—with an optional mostly downhill victory lap back to Pollença.",
     effort: "Respect the early climbing, fuel before Sóller, and ride Puig Major by feel rather than adrenaline.",
     map: assetUrl("assets/routes/stage-3-map.jpg"),
     profile: assetUrl("assets/routes/stage-3-profile.png"),
@@ -207,7 +207,7 @@ export const stages = [
     routeLine: "Pollença · Femenia · Lluc · Coll dels Reis · Sa Calobra · Pollença",
     briefing:
       "Three Tramuntana approaches prime the legs before the road tips down through Sa Calobra’s famous hairpins. At the coast, the group turns around for a staggered-start time trial back up one of cycling’s great roads.",
-    effort: "Stay controlled over Femenia and Lluc. The day is defined by what remains for the 9.44 km climb home.",
+    effort: "Stay controlled over Femenia and Lluc. The day is defined by what remains for the 9.44 km Sa Calobra ascent back to Coll dels Reis.",
     map: assetUrl("assets/routes/stage-6-map.jpg"),
     profile: assetUrl("assets/routes/stage-6-profile.png"),
     officialUrl: "https://www.sacalobra.cc/stage/6/",
@@ -272,8 +272,8 @@ export const stages = [
     rideKey: "Green-jersey sprint · 20% final sting",
     routeLine: "Pollença · Albercutx · Formentor lighthouse · Victoria · Puig Maria",
     briefing:
-      "Cycling Disneyland starts with the hidden road to Albercutx, then follows cliff roads and turquoise coves to the lighthouse. A green-jersey sprint, the narrow ramps of Victoria, and Puig Maria’s 20% sting make the final day anything but ceremonial.",
-    effort: "Let the scenery set the pace early. Save one sharp acceleration for the sprint and one stubborn gear for Puig Maria.",
+      "The ride starts with the hidden road to Albercutx, then follows cliff roads and turquoise coves to the lighthouse. A green-jersey sprint is planned if weather and road conditions are suitable, followed by Victoria’s narrow ramps and an optional Puig Maria finale with pitches over 20%.",
+    effort: "Let the scenery set the pace early. Keep something in reserve for the sprint if conditions allow, and for Puig Maria if you choose the optional finale.",
     map: assetUrl("assets/routes/stage-5-map.jpg"),
     profile: assetUrl("assets/routes/stage-5-profile.png"),
     officialUrl: "https://www.sacalobra.cc/stage/5/",

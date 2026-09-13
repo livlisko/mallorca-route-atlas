@@ -1,6 +1,6 @@
 # Mallorca Route Atlas
 
-An interactive roadbook for a six-stage Mallorca cycling camp, covering 18–23 October 2026.
+An interactive route atlas for a six-stage Mallorca cycling camp, covering 18–23 October 2026.
 
 [Open the live Mallorca Route Atlas](https://livlisko.github.io/mallorca-route-atlas/)
 
@@ -15,6 +15,14 @@ An interactive roadbook for a six-stage Mallorca cycling camp, covering 18–23 
 - Responsive layouts for desktop and mobile
 
 Public route links are motivational previews, not the camp's final navigation files. Riders should use the official roadbook when it is released.
+
+## Stage briefing sources
+
+The ride overviews are Codex-authored summaries of SCCC's public stage descriptions, not direct
+quotations or excerpts from the rider roadbook. Route lines summarize the corresponding public
+stage pages and maps. Effort and pacing blurbs are Atlas suggestions informed by those descriptions,
+not official coaching instructions. Each box links to its corresponding SCCC stage page; the
+camp coach's instructions take precedence.
 
 ## Local development
 
