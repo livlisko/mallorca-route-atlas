@@ -152,14 +152,7 @@ export function PackingPage() {
 
           <div className="packing-hero__title">
             <span className="kicker">Sa Calobra Cycling Club · Mallorca 2026</span>
-            <h1>
-              Pack light.
-              <span>Ride ready.</span>
-            </h1>
-            <p>
-              SCCC handles most of the pro-team details. This list protects the few things that can
-              stop your ride—and keeps you comfortable from cool starts to sunny summits.
-            </p>
+            <h1>Packing & preparation</h1>
             <div className="packing-hero__actions">
               <a className="scroll-cue" href="#packing-checklist">
                 Start the checklist
@@ -198,8 +191,7 @@ export function PackingPage() {
         <section className="packing-manifest" aria-labelledby="packing-manifest-title">
           <div className="packing-section-heading">
             <div>
-              <span className="eyebrow">Your rider manifest</span>
-              <h2 id="packing-manifest-title">Bring the irreplaceable. Borrow the rest.</h2>
+              <h2 id="packing-manifest-title">Packing checklist</h2>
             </div>
             <p>
               Built from the exact camp page, SCCC's current packing guide, printable list, and FAQ.
@@ -211,8 +203,7 @@ export function PackingPage() {
             <div className="packing-cabin__intro">
               <Backpack aria-hidden="true" size={34} weight="duotone" />
               <div>
-                <span className="eyebrow">Cabin-bag rule</span>
-                <h3 id="cabin-title">If the suitcase disappears, these still arrive.</h3>
+                <h3 id="cabin-title">Carry-on essentials</h3>
               </div>
             </div>
             <div className="packing-cabin__items">
@@ -277,7 +268,6 @@ export function PackingPage() {
                     <header className="packing-chapter__heading">
                       <span className="packing-chapter__number">{group.number}</span>
                       <Icon aria-hidden="true" size={28} weight="duotone" />
-                      <span className="eyebrow">{group.eyebrow}</span>
                       <h3 id={`packing-group-${group.id}`}>{group.title}</h3>
                       <p>{group.description}</p>
                     </header>
@@ -301,8 +291,7 @@ export function PackingPage() {
         <section className="packing-provided" aria-labelledby="provided-title">
           <div className="packing-provided__heading">
             <div>
-              <span className="eyebrow">Already waiting in Mallorca</span>
-              <h2 id="provided-title">Leave it off the list.</h2>
+              <h2 id="provided-title">Included at camp</h2>
             </div>
             <p>
               SCCC supplies the bike, riding infrastructure, daily fuel, recovery, and the villa
@@ -339,8 +328,7 @@ export function PackingPage() {
           <div className="packing-prep__main">
             <div className="packing-section-heading packing-section-heading--prep">
               <div>
-                <span className="eyebrow">Before the wheels roll</span>
-                <h2 id="prep-title">Arrive ready, not wrecked.</h2>
+                <h2 id="prep-title">Before you travel</h2>
               </div>
               <p>
                 Five small jobs protect the bike fit, the airport handoff, and Sunday's FTP test.
@@ -378,8 +366,8 @@ export function PackingPage() {
 
           <aside className="packing-travel-brief" aria-labelledby="travel-brief-title">
             <Airplane aria-hidden="true" size={33} weight="duotone" />
-            <span className="eyebrow">PMI flight brief</span>
-            <h2 id="travel-brief-title">Meet the team without the airport drama.</h2>
+            <span className="eyebrow">Palma de Mallorca · PMI</span>
+            <h2 id="travel-brief-title">Airport transfers</h2>
 
             <dl>
               <div>
@@ -399,14 +387,14 @@ export function PackingPage() {
             <div className="packing-travel-brief__note">
               <CloudRain aria-hidden="true" size={21} weight="duotone" />
               <span>
-                <strong>Forecast, not folklore.</strong>
+                <strong>Weather planning</strong>
                 Use 10–22°C / 50–71°F for planning, then check the real forecast a few days out.
               </span>
             </div>
             <div className="packing-travel-brief__note">
               <WashingMachine aria-hidden="true" size={21} weight="duotone" />
               <span>
-                <strong>Long-haul rider?</strong>
+                <strong>Long-haul arrival planning</strong>
                 With a time difference of more than four hours, SCCC suggests a night in Palma
                 before camp; the villa is not available early.
               </span>
@@ -416,8 +404,7 @@ export function PackingPage() {
 
         <section className="packing-sources" aria-labelledby="packing-sources-title">
           <div>
-            <span className="eyebrow">Source notes</span>
-            <h2 id="packing-sources-title">Official guidance, made usable.</h2>
+            <h2 id="packing-sources-title">Sources</h2>
             <p>
               Checked {sourceCheckedDate}. The live forecast, shuttle times, villa, bike model, and
               kit brand can change—reconfirm those details with SCCC before travel.

@@ -288,7 +288,7 @@ export const providedGroups = [
   },
   {
     icon: "support",
-    title: "On the road",
+    title: "Ride support",
     items: [
       "Support vehicle",
       "Mechanical support & common spares",
@@ -300,7 +300,7 @@ export const providedGroups = [
   },
   {
     icon: "recovery",
-    title: "Wear & recover",
+    title: "Clothing & recovery",
     items: [
       "SCCC bib shorts, jersey & socks",
       "SCCC T-shirt & backpack",
@@ -312,7 +312,7 @@ export const providedGroups = [
   },
   {
     icon: "villa",
-    title: "Villa & fuel",
+    title: "Accommodation & meals",
     items: [
       "Meals and drinks",
       "Shower & pool towels",
@@ -328,35 +328,35 @@ export const prepSteps = [
   {
     id: "prep-bike-fit",
     when: "By 26 Sep",
-    title: "Lock the bike fit",
+    title: "Confirm bike fit",
     detail:
       "Send SCCC your final height, inseam, saddle height, setback, and requested measurements at least three weeks before camp; confirm rental-bike sizing.",
   },
   {
     id: "prep-travel-admin",
     when: "Now",
-    title: "Close the travel loops",
+    title: "Confirm travel arrangements",
     detail:
       "Confirm PMI flights and shuttle details, insurance, card use abroad, phone roaming, WhatsApp, and any dietary or allergy needs with SCCC.",
   },
   {
     id: "prep-taper",
     when: "Final week",
-    title: "Taper—do not cram",
+    title: "Taper training",
     detail:
       "SCCC suggests cutting training volume 30–50%, keeping a little intensity, taking one or two full rest days, sleeping 7–9 hours, and testing shoes, cleats, and chargers.",
   },
   {
     id: "prep-forecast",
     when: "2–3 days out",
-    title: "Make the final layer call",
+    title: "Check the forecast & layers",
     detail:
       "Check the live Pollença and Tramuntana forecast. The 10–22°C / 50–71°F figure is a planning range, not the 2026 forecast.",
   },
   {
     id: "prep-arrival",
     when: "Arrival day",
-    title: "Protect Sunday's FTP test",
+    title: "Rest before Sunday's FTP test",
     detail:
       "Do not train before flying. Hydrate, settle onto local time, attend the evening briefing and bike fit, then arrive at the first ride rested.",
   },

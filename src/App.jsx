@@ -131,7 +131,7 @@ function BriefingPanel({ stage }) {
   return (
     <div className="detail-grid detail-grid--briefing">
       <div className="detail-copy">
-        <span className="eyebrow">The day in one sentence</span>
+        <span className="eyebrow">Ride overview</span>
         <p className="detail-quote">“{stage.briefing}”</p>
       </div>
       <div className="fact-panel">
@@ -139,7 +139,7 @@ function BriefingPanel({ stage }) {
           <RoadHorizon aria-hidden="true" size={25} weight="duotone" />
         </span>
         <div>
-          <span className="eyebrow">Route rhythm</span>
+          <span className="eyebrow">Route</span>
           <p>{stage.routeLine}</p>
         </div>
       </div>
@@ -148,7 +148,7 @@ function BriefingPanel({ stage }) {
           <Bicycle aria-hidden="true" size={25} weight="duotone" />
         </span>
         <div>
-          <span className="eyebrow">Ride it well</span>
+          <span className="eyebrow">Effort & pacing</span>
           <p>{stage.effort}</p>
         </div>
       </div>
@@ -193,7 +193,6 @@ function RoutePanel({ stage }) {
       <div className="public-route-list">
         <div className="section-heading section-heading--compact">
           <div>
-            <span className="eyebrow">Route files</span>
             <h3>Closest public previews</h3>
           </div>
         </div>
@@ -255,8 +254,7 @@ function ClimbsPanel({ stage, placement = "dialog" }) {
     >
       <div className="climbs-panel__intro">
         <div>
-          <span className="eyebrow">Notable climbs</span>
-          <h3>{stage.climbs.length} segments to know</h3>
+          <h3>Notable climbs</h3>
         </div>
         <p>Every Strava button links to the exact segment published on the official SCCC stage page.</p>
       </div>
@@ -465,14 +463,7 @@ export function App() {
 
             <div className="masthead__title">
               <span className="kicker">Sa Calobra Cycling Club · Mallorca 2026</span>
-              <h1>
-                Six rides.
-                <span>One unforgettable island.</span>
-              </h1>
-              <p>
-                Maps, profiles, climbs, and every road worth dreaming about—gathered into one
-                motivation atlas for the week ahead.
-              </p>
+              <h1>Mallorca Route Atlas</h1>
               <a className="scroll-cue" href="#stages">
                 Explore the stages
                 <ArrowDown aria-hidden="true" size={19} weight="bold" />
@@ -490,7 +481,7 @@ export function App() {
                   <dd>{weekTotals.elevation}</dd>
                 </div>
                 <div>
-                  <dt>The week</dt>
+                  <dt>Ride days</dt>
                   <dd>{weekTotals.rideDays}</dd>
                 </div>
               </dl>
@@ -506,11 +497,10 @@ export function App() {
           <div className="section-heading">
             <div>
               <span className="eyebrow">Six stages · 18–23 October 2026</span>
-              <h2 id="stage-atlas-title">Your week in Mallorca.</h2>
+              <h2 id="stage-atlas-title">Stages</h2>
             </div>
             <p>
-              Every route map, elevation profile, climb, and verified link travels together. Choose
-              a stage to open the full road briefing.
+              Select a stage for its full briefing, route links, and climb details.
             </p>
           </div>
           <div className="stage-list">
@@ -522,13 +512,12 @@ export function App() {
 
         <section className="sources-section" id="sources" aria-labelledby="sources-title">
           <div className="sources-section__intro">
-            <span className="eyebrow">Source notes</span>
-            <h2 id="sources-title">Know the road. Keep the mystery.</h2>
+            <h2 id="sources-title">Sources & route notes</h2>
           </div>
           <div className="source-columns">
             <div>
               <MapTrifold aria-hidden="true" size={27} weight="duotone" />
-              <h3>Official visual truth</h3>
+              <h3>Official maps & profiles</h3>
               <p>Maps, elevation profiles, climb stats, and segment links come from Sa Calobra Cycling Club.</p>
               <ExternalLink href="https://www.sacalobra.cc/favorite-routes/">
                 Favorite routes overview
@@ -557,7 +546,6 @@ export function App() {
 
       <footer className="site-footer">
         <span>Mallorca Route Atlas · 2026</span>
-        <span>Made for the miles ahead.</span>
       </footer>
 
       </div>

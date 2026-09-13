@@ -174,8 +174,7 @@ function UnlockCard({ onUnlocked, notice }) {
       <div className="itinerary-unlock__seal" aria-hidden="true">
         <LockKey size={33} weight="duotone" />
       </div>
-      <span className="eyebrow">Encrypted travel brief</span>
-      <h2 id="unlock-title">Your plans stay under wraps.</h2>
+      <h2 id="unlock-title">Unlock itinerary</h2>
       <p>
         Enter the private code to decrypt the itinerary on this device. The readable details and
         your code are never stored by this site.
@@ -215,12 +214,11 @@ function UnlockCard({ onUnlocked, notice }) {
       </form>
 
       <details className="itinerary-privacy-note">
-        <summary>How this protects the page</summary>
+        <summary>Privacy & hosting limitations</summary>
         <p>
-          GitHub Pages is public, so the deployed file is encrypted with AES-GCM rather than hidden
-          behind a pretend login. Anyone can download the ciphertext, which is why the strong,
-          one-of-a-kind code matters. For identity-only access and account recovery, this page would
-          need to move behind authenticated hosting.
+          GitHub Pages is public. The deployed file is AES-GCM ciphertext, not server-authenticated
+          content, and anyone can download it. A strong, unique code protects local decryption.
+          Identity-only access and account recovery require authenticated hosting.
         </p>
       </details>
     </section>
@@ -362,11 +360,10 @@ function ItineraryBrief({ itinerary, onLock }) {
       <section className="itinerary-section itinerary-section--alerts" aria-labelledby="alerts-title">
         <div className="itinerary-section__heading">
           <div>
-            <span className="eyebrow">Read this first</span>
             <h2 id="alerts-title">
               {itinerary.alerts.length === 0
-                ? "No details need your attention."
-                : `${itinerary.alerts.length} detail${itinerary.alerts.length === 1 ? "" : "s"} need${itinerary.alerts.length === 1 ? "s" : ""} your attention.`}
+                ? "No items to review"
+                : `${itinerary.alerts.length} item${itinerary.alerts.length === 1 ? "" : "s"} to review`}
             </h2>
           </div>
           <p>These are evidence conflicts or missing confirmations—not guesses about what might happen.</p>
@@ -379,8 +376,7 @@ function ItineraryBrief({ itinerary, onLock }) {
       <section className="itinerary-section" aria-labelledby="journey-title">
         <div className="itinerary-section__heading">
           <div>
-            <span className="eyebrow">The journey</span>
-            <h2 id="journey-title">Door to island, in order.</h2>
+            <h2 id="journey-title">Flights & transport</h2>
           </div>
           <p>Confirmed times and allowances come from the supplied booking PDFs.</p>
         </div>
@@ -392,8 +388,7 @@ function ItineraryBrief({ itinerary, onLock }) {
       <section className="itinerary-section" aria-labelledby="stays-title">
         <div className="itinerary-section__heading">
           <div>
-            <span className="eyebrow">Where you sleep</span>
-            <h2 id="stays-title">Stays, without the wishful thinking.</h2>
+            <h2 id="stays-title">Lodging</h2>
           </div>
           <p>Only confirmed or explicitly included lodging belongs here.</p>
         </div>
@@ -405,8 +400,7 @@ function ItineraryBrief({ itinerary, onLock }) {
       <section className="itinerary-section itinerary-wallet" aria-labelledby="wallet-title">
         <div className="itinerary-section__heading">
           <div>
-            <span className="eyebrow">Booking wallet</span>
-            <h2 id="wallet-title">References, one tap away.</h2>
+            <h2 id="wallet-title">Booking references</h2>
           </div>
           <p>Values stay concealed until you choose to reveal them. No copy or download shortcut is provided.</p>
         </div>
@@ -416,8 +410,7 @@ function ItineraryBrief({ itinerary, onLock }) {
       <section className="itinerary-section itinerary-missing" aria-labelledby="missing-title">
         <div className="itinerary-missing__icon"><CalendarBlank aria-hidden="true" size={30} weight="duotone" /></div>
         <div>
-          <span className="eyebrow">Still to collect</span>
-          <h2 id="missing-title">Your travel folder is not complete yet.</h2>
+          <h2 id="missing-title">Missing confirmations & details</h2>
           <ul>
             {itinerary.missing.map((item) => <li key={item}>{item}</li>)}
           </ul>
@@ -468,8 +461,7 @@ export function PrivateItineraryPage() {
         </picture>
         <span className="itinerary-hero__veil" aria-hidden="true" />
         <div className="itinerary-hero__title">
-          <span className="kicker">Private trip space</span>
-          <h1>A little privacy, <span>please.</span></h1>
+          <h1>Private itinerary</h1>
           <p>Your personal bookings are encrypted before they reach this public website.</p>
           <a className="itinerary-hero__back" href={baseUrl}>
             <ArrowLeft aria-hidden="true" size={18} weight="bold" />
@@ -488,7 +480,7 @@ export function PrivateItineraryPage() {
       </main>
 
       <footer className="itinerary-footer">
-        <span>Mallorca Route Atlas · private trip space</span>
+        <span>Mallorca Route Atlas · Private itinerary</span>
         <span>Nothing readable is stored in the public build.</span>
       </footer>
     </div>
