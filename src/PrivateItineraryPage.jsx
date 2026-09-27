@@ -7,6 +7,7 @@ import {
   CalendarBlank,
   CarProfile,
   CheckCircle,
+  CloudSun,
   CompassRose,
   Eye,
   EyeSlash,
@@ -17,11 +18,12 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { decryptPrivateItinerary } from "./privateItineraryCrypto.js";
+import { WeatherPanel } from "./WeatherPanel.jsx";
 
 const baseUrl = import.meta.env.BASE_URL;
 const packingPageUrl = `${baseUrl}packing/`;
 const itineraryPageUrl = `${baseUrl}itinerary/`;
-const payloadUrl = `${baseUrl}assets/private/payload.v1.json`;
+const payloadUrl = `${baseUrl}assets/private/payload.v2.json`;
 const heroDesktopUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape.webp`;
 const heroMobileUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
 const idleLockMs = 5 * 60 * 1000;
@@ -338,18 +340,47 @@ function BookingWallet({ items }) {
 
 function ItineraryBrief({ itinerary, onLock }) {
   const headingRef = useRef(null);
+  const viewTabsRef = useRef(null);
+  const [activeView, setActiveView] = useState("itinerary");
 
   useEffect(() => {
     headingRef.current?.focus();
   }, []);
 
+  const showView = (view) => {
+    setActiveView(view);
+  };
+
+  const moveViewFocus = (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const views = ["itinerary", "weather"];
+    const currentIndex = views.indexOf(activeView);
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? views.length - 1
+        : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + views.length) % views.length;
+    const nextView = views[nextIndex];
+    showView(nextView);
+    viewTabsRef.current?.querySelector(`[data-private-view="${nextView}"]`)?.focus();
+  };
+
+  const isWeather = activeView === "weather";
+
   return (
-    <article className="itinerary-brief" aria-labelledby="itinerary-title">
+    <article className="itinerary-brief" aria-labelledby="private-brief-title">
       <header className="itinerary-brief__header">
         <div>
-          <span className="eyebrow">Private travel brief · checked {itinerary.reviewedOn}</span>
-          <h2 id="itinerary-title" ref={headingRef} tabIndex="-1">{itinerary.headline}</h2>
-          <p>{itinerary.timeNote}</p>
+          <span className="eyebrow">Private travel tools · checked {itinerary.reviewedOn}</span>
+          <h2 id="private-brief-title" ref={headingRef} tabIndex="-1">
+            {isWeather ? "October weather" : itinerary.headline}
+          </h2>
+          <p>
+            {isWeather
+              ? "A daily view for every trip stop, with live forecasts kept distinct from long-range planning averages."
+              : itinerary.timeNote}
+          </p>
         </div>
         <button type="button" className="itinerary-lock-button" onClick={() => onLock("manual")}>
           <LockKey aria-hidden="true" size={19} weight="fill" />
@@ -357,65 +388,102 @@ function ItineraryBrief({ itinerary, onLock }) {
         </button>
       </header>
 
-      <section className="itinerary-section itinerary-section--alerts" aria-labelledby="alerts-title">
-        <div className="itinerary-section__heading">
-          <div>
-            <h2 id="alerts-title">
-              {itinerary.alerts.length === 0
-                ? "No items to review"
-                : `${itinerary.alerts.length} item${itinerary.alerts.length === 1 ? "" : "s"} to review`}
-            </h2>
-          </div>
-          <p>These are evidence conflicts or missing confirmations—not guesses about what might happen.</p>
-        </div>
-        <div className="itinerary-alerts">
-          {itinerary.alerts.map((alert) => <AlertCard key={alert.title} alert={alert} />)}
-        </div>
-      </section>
+      <div className="private-view-tabs" ref={viewTabsRef} role="tablist" aria-label="Private trip tools" onKeyDown={moveViewFocus}>
+        <button
+          type="button"
+          role="tab"
+          id="itinerary-view-tab"
+          aria-controls="itinerary-view-panel"
+          aria-selected={!isWeather}
+          data-private-view="itinerary"
+          tabIndex={isWeather ? -1 : 0}
+          onClick={() => showView("itinerary")}
+        >
+          <CalendarBlank aria-hidden="true" size={19} weight="duotone" />
+          Itinerary
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="weather-view-tab"
+          aria-controls="weather-view-panel"
+          aria-selected={isWeather}
+          data-private-view="weather"
+          tabIndex={isWeather ? 0 : -1}
+          onClick={() => showView("weather")}
+        >
+          <CloudSun aria-hidden="true" size={20} weight="duotone" />
+          Weather
+        </button>
+      </div>
 
-      <section className="itinerary-section" aria-labelledby="journey-title">
-        <div className="itinerary-section__heading">
-          <div>
-            <h2 id="journey-title">Flights & transport</h2>
-          </div>
-          <p>Confirmed times and allowances come from the supplied booking PDFs.</p>
+      {isWeather ? (
+        <div id="weather-view-panel" role="tabpanel" aria-labelledby="weather-view-tab">
+          <WeatherPanel weather={itinerary.weather} />
         </div>
-        <div className="itinerary-journey">
-          {itinerary.journey.map((item, index) => <JourneyCard key={item.id} item={item} index={index} />)}
-        </div>
-      </section>
+      ) : (
+        <div id="itinerary-view-panel" role="tabpanel" aria-labelledby="itinerary-view-tab">
+          <section className="itinerary-section itinerary-section--alerts" aria-labelledby="alerts-title">
+            <div className="itinerary-section__heading">
+              <div>
+                <h2 id="alerts-title">
+                  {itinerary.alerts.length === 0
+                    ? "No items to review"
+                    : `${itinerary.alerts.length} item${itinerary.alerts.length === 1 ? "" : "s"} to review`}
+                </h2>
+              </div>
+              <p>These are evidence conflicts or missing confirmations—not guesses about what might happen.</p>
+            </div>
+            <div className="itinerary-alerts">
+              {itinerary.alerts.map((alert) => <AlertCard key={alert.title} alert={alert} />)}
+            </div>
+          </section>
 
-      <section className="itinerary-section" aria-labelledby="stays-title">
-        <div className="itinerary-section__heading">
-          <div>
-            <h2 id="stays-title">Lodging</h2>
-          </div>
-          <p>Only confirmed or explicitly included lodging belongs here.</p>
-        </div>
-        <div className="itinerary-stays">
-          {itinerary.stays.map((stay) => <StayCard key={`${stay.date}-${stay.title}`} stay={stay} />)}
-        </div>
-      </section>
+          <section className="itinerary-section" aria-labelledby="journey-title">
+            <div className="itinerary-section__heading">
+              <div>
+                <h2 id="journey-title">Flights & transport</h2>
+              </div>
+              <p>Confirmed times and allowances come from the supplied booking PDFs.</p>
+            </div>
+            <div className="itinerary-journey">
+              {itinerary.journey.map((item, index) => <JourneyCard key={item.id} item={item} index={index} />)}
+            </div>
+          </section>
 
-      <section className="itinerary-section itinerary-wallet" aria-labelledby="wallet-title">
-        <div className="itinerary-section__heading">
-          <div>
-            <h2 id="wallet-title">Booking references</h2>
-          </div>
-          <p>Values stay concealed until you choose to reveal them. No copy or download shortcut is provided.</p>
-        </div>
-        <BookingWallet items={itinerary.wallet} />
-      </section>
+          <section className="itinerary-section" aria-labelledby="stays-title">
+            <div className="itinerary-section__heading">
+              <div>
+                <h2 id="stays-title">Lodging</h2>
+              </div>
+              <p>Only confirmed or explicitly included lodging belongs here.</p>
+            </div>
+            <div className="itinerary-stays">
+              {itinerary.stays.map((stay) => <StayCard key={`${stay.date}-${stay.title}`} stay={stay} />)}
+            </div>
+          </section>
 
-      <section className="itinerary-section itinerary-missing" aria-labelledby="missing-title">
-        <div className="itinerary-missing__icon"><CalendarBlank aria-hidden="true" size={30} weight="duotone" /></div>
-        <div>
-          <h2 id="missing-title">Missing confirmations & details</h2>
-          <ul>
-            {itinerary.missing.map((item) => <li key={item}>{item}</li>)}
-          </ul>
+          <section className="itinerary-section itinerary-wallet" aria-labelledby="wallet-title">
+            <div className="itinerary-section__heading">
+              <div>
+                <h2 id="wallet-title">Booking references</h2>
+              </div>
+              <p>Values stay concealed until you choose to reveal them. No copy or download shortcut is provided.</p>
+            </div>
+            <BookingWallet items={itinerary.wallet} />
+          </section>
+
+          <section className="itinerary-section itinerary-missing" aria-labelledby="missing-title">
+            <div className="itinerary-missing__icon"><CalendarBlank aria-hidden="true" size={30} weight="duotone" /></div>
+            <div>
+              <h2 id="missing-title">Missing confirmations & details</h2>
+              <ul>
+                {itinerary.missing.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          </section>
         </div>
-      </section>
+      )}
     </article>
   );
 }

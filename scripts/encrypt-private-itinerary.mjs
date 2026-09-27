@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { encryptPrivateItinerary, validatePrivateItinerary } from "../src/privateItineraryCrypto.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const defaultOutput = path.join(root, "public", "assets", "private", "payload.v1.json");
+const defaultOutput = path.join(root, "public", "assets", "private", "payload.v2.json");
 
 function readHidden(prompt) {
   if (!process.stdin.isTTY || !process.stdin.setRawMode) {

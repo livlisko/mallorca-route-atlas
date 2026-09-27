@@ -14,7 +14,7 @@ const privateCode = "sample-private-code-7H4Q-9Z2M";
 
 function samplePayload() {
   return {
-    version: 1,
+    version: 2,
     reviewedOn: "1 January 2030",
     headline: "A synthetic trip used only for testing",
     timeNote: "All sample times are local.",
@@ -36,6 +36,44 @@ function samplePayload() {
     stays: [{ date: "Monday", title: "Sample stay", status: "confirmed", place: "Example", details: "Synthetic." }],
     wallet: [{ label: "Sample code", value: "SAMPLE123", note: "Not a real booking." }],
     missing: ["Nothing real is represented here."],
+    weather: {
+      month: "2026-10",
+      generatedOn: "1 January 2030",
+      climate: {
+        period: "1991–2020",
+        sourceLabel: "Synthetic reanalysis baseline",
+        sourceUrl: "https://open-meteo.com/en/docs/historical-weather-api",
+        method: "Synthetic calendar-day averages for automated testing only.",
+      },
+      forecast: {
+        sourceLabel: "Open-Meteo Forecast API",
+        sourceUrl: "https://open-meteo.com/en/docs",
+        privacyUrl: "https://open-meteo.com/en/terms",
+        licenceLabel: "CC BY 4.0",
+        licenceUrl: "https://creativecommons.org/licenses/by/4.0/",
+      },
+      locations: [
+        {
+          id: "sample-place",
+          label: "Sample place",
+          region: "Synthetic region",
+          latitude: 10,
+          longitude: 20,
+          timezone: "Europe/Paris",
+          tripStart: "2026-10-04",
+          tripEnd: "2026-10-06",
+          climateDays: Array.from({ length: 31 }, (_, index) => ({
+            date: `2026-10-${String(index + 1).padStart(2, "0")}`,
+            highC: 20,
+            lowC: 10,
+            wetDayFrequencyPct: 25,
+            precipMm: 2,
+            gustKmh: 24,
+            sunshineHours: 6,
+          })),
+        },
+      ],
+    },
   };
 }
 
@@ -60,15 +98,41 @@ test("rejects the wrong private code and ciphertext tampering", async () => {
 
 test("rejects unsupported envelopes before decryption", () => {
   const base = {
-    version: 1,
+    version: 2,
     context: ITINERARY_CONTEXT,
     kdf: { name: "PBKDF2", hash: "SHA-256", iterations: PBKDF2_ITERATIONS, salt: btoa("1234567890abcdef") },
     cipher: { name: "AES-GCM", iv: btoa("123456789012"), tagLength: 128 },
     ciphertext: btoa("12345678901234567"),
   };
-  assert.throws(() => validateEnvelope({ ...base, version: 2 }));
+  assert.throws(() => validateEnvelope({ ...base, version: 1 }));
   assert.throws(() => validateEnvelope({ ...base, context: `${ITINERARY_CONTEXT}-changed` }));
   assert.throws(() => validateEnvelope({ ...base, kdf: { ...base.kdf, iterations: 1 } }));
+});
+
+test("rejects malformed private weather data", () => {
+  const badCoordinate = samplePayload();
+  badCoordinate.weather.locations[0].latitude = 100;
+  assert.throws(() => validatePrivateItinerary(badCoordinate));
+
+  const missingDay = samplePayload();
+  missingDay.weather.locations[0].climateDays.pop();
+  assert.throws(() => validatePrivateItinerary(missingDay));
+
+  const wrongDate = samplePayload();
+  wrongDate.weather.locations[0].climateDays[4].date = "2026-10-06";
+  assert.throws(() => validatePrivateItinerary(wrongDate));
+
+  const wrongSource = samplePayload();
+  wrongSource.weather.forecast.sourceUrl = "https://example.com/weather";
+  assert.throws(() => validatePrivateItinerary(wrongSource));
+
+  const invertedTemperature = samplePayload();
+  invertedTemperature.weather.locations[0].climateDays[0].lowC = 30;
+  assert.throws(() => validatePrivateItinerary(invertedTemperature));
+
+  const outsideMonth = samplePayload();
+  outsideMonth.weather.locations[0].tripStart = "2026-09-30";
+  assert.throws(() => validatePrivateItinerary(outsideMonth));
 });
 
 test("rejects unexpected or source-document fields in decrypted data", () => {

@@ -1,8 +1,21 @@
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder("utf-8", { fatal: true });
 
-export const ITINERARY_CONTEXT = "mallorca-route-atlas/private-itinerary/v1";
+export const ITINERARY_CONTEXT = "mallorca-route-atlas/private-itinerary/v2";
 export const PBKDF2_ITERATIONS = 600_000;
+
+const WEATHER_MONTH = "2026-10";
+const WEATHER_DATES = Array.from(
+  { length: 31 },
+  (_, index) => `${WEATHER_MONTH}-${String(index + 1).padStart(2, "0")}`,
+);
+const WEATHER_SOURCE_URLS = new Set([
+  "https://open-meteo.com/en/docs",
+  "https://open-meteo.com/en/docs/historical-weather-api",
+  "https://open-meteo.com/en/terms",
+  "https://open-meteo.com/en/licence",
+  "https://creativecommons.org/licenses/by/4.0/",
+]);
 
 const forbiddenPrivateText = [
   /\/Users\//i,
@@ -39,6 +52,31 @@ function assertStringArray(value, path, maxItems = 20) {
     throw new TypeError(`${path} must be a supported list.`);
   }
   value.forEach((item, index) => assertString(item, `${path}[${index}]`));
+}
+
+function assertFiniteNumber(value, path, minimum, maximum) {
+  if (!Number.isFinite(value) || value < minimum || value > maximum) {
+    throw new TypeError(`${path} must be a supported number.`);
+  }
+}
+
+function assertIsoDate(value, path) {
+  assertString(value, path, { max: 10 });
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const date = match ? new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]))) : null;
+  if (
+    !match ||
+    date.getUTCFullYear() !== Number(match[1]) ||
+    date.getUTCMonth() !== Number(match[2]) - 1 ||
+    date.getUTCDate() !== Number(match[3])
+  ) {
+    throw new TypeError(`${path} must be an ISO date.`);
+  }
+}
+
+function assertWeatherSourceUrl(value, path) {
+  assertString(value, path, { max: 120 });
+  if (!WEATHER_SOURCE_URLS.has(value)) throw new TypeError(`${path} is not an approved source URL.`);
 }
 
 function assertScheduleItem(value, path) {
@@ -106,13 +144,101 @@ function assertWalletItem(value, path) {
   assertString(value.note, `${path}.note`, { max: 150 });
 }
 
+function assertWeatherDay(value, path, expectedDate) {
+  assertExactKeys(
+    value,
+    ["date", "highC", "lowC", "wetDayFrequencyPct", "precipMm", "gustKmh", "sunshineHours"],
+    path,
+  );
+  assertIsoDate(value.date, `${path}.date`);
+  if (value.date !== expectedDate) throw new TypeError(`${path}.date is outside the supported month.`);
+  assertFiniteNumber(value.highC, `${path}.highC`, -60, 60);
+  assertFiniteNumber(value.lowC, `${path}.lowC`, -60, 60);
+  if (value.lowC > value.highC) throw new TypeError(`${path} has a low above its high.`);
+  assertFiniteNumber(value.wetDayFrequencyPct, `${path}.wetDayFrequencyPct`, 0, 100);
+  assertFiniteNumber(value.precipMm, `${path}.precipMm`, 0, 500);
+  assertFiniteNumber(value.gustKmh, `${path}.gustKmh`, 0, 300);
+  assertFiniteNumber(value.sunshineHours, `${path}.sunshineHours`, 0, 24);
+}
+
+function assertWeatherLocation(value, path) {
+  assertExactKeys(
+    value,
+    [
+      "id",
+      "label",
+      "region",
+      "latitude",
+      "longitude",
+      "timezone",
+      "tripStart",
+      "tripEnd",
+      "climateDays",
+    ],
+    path,
+  );
+  assertString(value.id, `${path}.id`, { max: 32 });
+  if (!/^[a-z0-9-]+$/.test(value.id)) throw new TypeError(`${path}.id is unsupported.`);
+  assertString(value.label, `${path}.label`, { max: 72 });
+  assertString(value.region, `${path}.region`, { max: 90 });
+  assertFiniteNumber(value.latitude, `${path}.latitude`, -90, 90);
+  assertFiniteNumber(value.longitude, `${path}.longitude`, -180, 180);
+  assertString(value.timezone, `${path}.timezone`, { max: 64 });
+  if (!/^[A-Za-z_+-]+\/[A-Za-z0-9_+\-/]+$/.test(value.timezone)) {
+    throw new TypeError(`${path}.timezone is unsupported.`);
+  }
+  assertIsoDate(value.tripStart, `${path}.tripStart`);
+  assertIsoDate(value.tripEnd, `${path}.tripEnd`);
+  if (!WEATHER_DATES.includes(value.tripStart) || !WEATHER_DATES.includes(value.tripEnd)) {
+    throw new TypeError(`${path} has a trip window outside the supported month.`);
+  }
+  if (value.tripStart > value.tripEnd) throw new TypeError(`${path} has an invalid trip window.`);
+  if (!Array.isArray(value.climateDays) || value.climateDays.length !== WEATHER_DATES.length) {
+    throw new TypeError(`${path}.climateDays must cover all of October.`);
+  }
+  value.climateDays.forEach((day, index) => assertWeatherDay(day, `${path}.climateDays[${index}]`, WEATHER_DATES[index]));
+}
+
+function assertWeather(value, path) {
+  assertExactKeys(value, ["month", "generatedOn", "climate", "forecast", "locations"], path);
+  if (value.month !== WEATHER_MONTH) throw new TypeError(`${path}.month is unsupported.`);
+  assertString(value.generatedOn, `${path}.generatedOn`, { max: 72 });
+
+  assertExactKeys(value.climate, ["period", "sourceLabel", "sourceUrl", "method"], `${path}.climate`);
+  if (value.climate.period !== "1991–2020") throw new TypeError(`${path}.climate.period is unsupported.`);
+  assertString(value.climate.sourceLabel, `${path}.climate.sourceLabel`, { max: 100 });
+  assertWeatherSourceUrl(value.climate.sourceUrl, `${path}.climate.sourceUrl`);
+  assertString(value.climate.method, `${path}.climate.method`, { max: 420 });
+
+  assertExactKeys(
+    value.forecast,
+    ["sourceLabel", "sourceUrl", "privacyUrl", "licenceLabel", "licenceUrl"],
+    `${path}.forecast`,
+  );
+  assertString(value.forecast.sourceLabel, `${path}.forecast.sourceLabel`, { max: 100 });
+  assertWeatherSourceUrl(value.forecast.sourceUrl, `${path}.forecast.sourceUrl`);
+  assertWeatherSourceUrl(value.forecast.privacyUrl, `${path}.forecast.privacyUrl`);
+  assertString(value.forecast.licenceLabel, `${path}.forecast.licenceLabel`, { max: 40 });
+  assertWeatherSourceUrl(value.forecast.licenceUrl, `${path}.forecast.licenceUrl`);
+
+  if (!Array.isArray(value.locations) || value.locations.length < 1 || value.locations.length > 8) {
+    throw new TypeError(`${path}.locations is unsupported.`);
+  }
+  const ids = new Set();
+  value.locations.forEach((location, index) => {
+    assertWeatherLocation(location, `${path}.locations[${index}]`);
+    if (ids.has(location.id)) throw new TypeError(`${path}.locations contains a duplicate id.`);
+    ids.add(location.id);
+  });
+}
+
 export function validatePrivateItinerary(payload) {
   assertExactKeys(
     payload,
-    ["version", "reviewedOn", "headline", "timeNote", "journey", "alerts", "stays", "wallet", "missing"],
+    ["version", "reviewedOn", "headline", "timeNote", "journey", "alerts", "stays", "wallet", "missing", "weather"],
     "payload",
   );
-  if (payload.version !== 1) throw new TypeError("payload.version is unsupported.");
+  if (payload.version !== 2) throw new TypeError("payload.version is unsupported.");
   assertString(payload.reviewedOn, "payload.reviewedOn", { max: 72 });
   assertString(payload.headline, "payload.headline", { max: 150 });
   assertString(payload.timeNote, "payload.timeNote", { max: 180 });
@@ -137,6 +263,7 @@ export function validatePrivateItinerary(payload) {
   }
   payload.wallet.forEach((item, index) => assertWalletItem(item, `payload.wallet[${index}]`));
   assertStringArray(payload.missing, "payload.missing", 20);
+  assertWeather(payload.weather, "payload.weather");
   return payload;
 }
 
@@ -163,7 +290,7 @@ function base64ToBytes(value, path) {
 
 export function validateEnvelope(envelope) {
   assertExactKeys(envelope, ["version", "context", "kdf", "cipher", "ciphertext"], "envelope");
-  if (envelope.version !== 1 || envelope.context !== ITINERARY_CONTEXT) {
+  if (envelope.version !== 2 || envelope.context !== ITINERARY_CONTEXT) {
     throw new TypeError("This encrypted brief version is not supported.");
   }
 
@@ -238,7 +365,7 @@ export async function encryptPrivateItinerary(payload, passphrase) {
       plaintext,
     );
     return {
-      version: 1,
+      version: 2,
       context: ITINERARY_CONTEXT,
       kdf: {
         name: "PBKDF2",

@@ -12,6 +12,7 @@ An interactive route atlas for a six-stage Mallorca cycling camp, covering 18–
 - Official Sa Calobra Cycling Club stage pages and films
 - Clearly labeled public route previews from Ride with GPS, Bikemap, Wikiloc, and Cycling UK
 - A separate encrypted trip brief whose readable contents and unlock code are never committed
+- A private October weather planner with encrypted trip locations, 31-day planning baselines, and opt-in live forecasts
 - Responsive layouts for desktop and mobile
 
 Public route links are motivational previews, not the camp's final navigation files. Riders should use the official roadbook when it is released.
@@ -48,3 +49,7 @@ over plaintext data.
 
 Before a private-itinerary release, point `PRIVATE_ITINERARY_DENYLIST` to an ignored file outside the
 repository and run `npm run privacy:scan:release`. The release scan intentionally fails without it.
+
+The Weather tab is available only after the trip brief is unlocked. Its location data and monthly
+baselines remain inside the encrypted payload. Live forecast refresh is opt-in and sends only the
+selected coarse coordinates to Open-Meteo; it never sends booking details or persists returned data.

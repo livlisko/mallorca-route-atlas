@@ -111,6 +111,7 @@ function trackedEntries() {
     .toString("utf8")
     .split("\0")
     .filter(Boolean)
+    .filter((relativePath) => existsSync(path.join(root, relativePath)))
     .map((relativePath) => ({ path: relativePath, contents: readFileSync(path.join(root, relativePath)) }));
 }
 

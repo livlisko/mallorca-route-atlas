@@ -11,7 +11,7 @@
     "encrypt:itinerary": "node scripts/encrypt-private-itinerary.mjs",
     "build": "npm run privacy:scan && vite build && node scripts/prepare-sites-build.mjs && npm run privacy:scan:dist",
     "preview": "vite preview",
-    "test:private": "node --test tests/private-itinerary.test.mjs",
+    "test:private": "node --test tests/private-*.test.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
   "dependencies": {
