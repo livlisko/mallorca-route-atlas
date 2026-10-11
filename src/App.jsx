@@ -21,6 +21,7 @@ const heroDesktopUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramunta
 const heroMobileUrl = `${import.meta.env.BASE_URL}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
 const packingPageUrl = `${import.meta.env.BASE_URL}packing/`;
 const itineraryPageUrl = `${import.meta.env.BASE_URL}itinerary/`;
+const alsacePageUrl = `${import.meta.env.BASE_URL}alsace/`;
 
 const tabs = [
   { id: "briefing", label: "Briefing" },
@@ -470,6 +471,7 @@ export function App() {
             <a href="#stages">Stages</a>
             <a href={packingPageUrl}>Packing</a>
             <a href={itineraryPageUrl}>Trip</a>
+            <a href={alsacePageUrl}>Alsace</a>
             <a href="#sources">Sources</a>
           </div>
         </nav>

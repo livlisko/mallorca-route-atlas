@@ -12,6 +12,7 @@ export default defineConfig(({ command }) => ({
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
         packing: fileURLToPath(new URL("./packing/index.html", import.meta.url)),
         itinerary: fileURLToPath(new URL("./itinerary/index.html", import.meta.url)),
+        alsace: fileURLToPath(new URL("./alsace/index.html", import.meta.url)),
       },
     },
   },
@@ -22,7 +23,7 @@ export default defineConfig(({ command }) => ({
     host: "0.0.0.0",
     allowedHosts: ["terminal.local"],
     warmup: {
-      clientFiles: ["./src/main.jsx", "./src/packing-main.jsx"],
+      clientFiles: ["./src/main.jsx", "./src/packing-main.jsx", "./src/alsace-main.jsx"],
     },
   },
   plugins: [

@@ -1577,6 +1577,12 @@ img {
     display: none;
   }
 
+  .app-shell .topbar__links a:first-child,
+  .packing-page .topbar__links a:first-child,
+  .itinerary-page .topbar__links a:first-child {
+    display: none;
+  }
+
   .masthead {
     min-height: 900px;
     padding: 128px 20px 246px;

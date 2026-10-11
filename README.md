@@ -13,6 +13,7 @@ An interactive route atlas for a six-stage Mallorca cycling camp, covering 18–
 - Clearly labeled public route previews from Ride with GPS, Bikemap, Wikiloc, and Cycling UK
 - A separate encrypted trip brief whose readable contents and unlock code are never committed
 - A private October weather planner with encrypted trip locations, 31-day planning baselines, and opt-in live forecasts
+- A separate password-gated Alsace field guide with 15 sourced places, filters, an interactive map, and ready-made day plans
 - Responsive layouts for desktop and mobile
 
 Public route links are motivational previews, not the camp's final navigation files. Riders should use the official roadbook when it is released.
@@ -53,3 +54,13 @@ repository and run `npm run privacy:scan:release`. The release scan intentionall
 The Weather tab is available only after the trip brief is unlocked. Its location data and monthly
 baselines remain inside the encrypted payload. Live forecast refresh is opt-in and sends only the
 selected coarse coordinates to Open-Meteo; it never sends booking details or persists returned data.
+
+## Alsace guide boundary
+
+The `/alsace/` entry uses its own AES-256-GCM envelope and authenticated context. Its readable source
+must stay outside the repository and can be refreshed locally with `npm run encrypt:alsace --
+/absolute/path/to/alsace.private.json`. The short code is intentionally described as a casual privacy
+curtain for public sightseeing research; personal bookings stay in the separately encrypted Trip page.
+
+OpenStreetMap tiles load only after the guide is unlocked and the Map view is opened. At that point the
+tile provider receives the visitor's IP, the page origin, and the viewed map area; no booking data is sent.

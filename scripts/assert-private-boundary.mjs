@@ -10,6 +10,7 @@ const imageExtensions = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".avi
 const approvedImageFiles = new Set([
   "public/assets/hero/mallorca-tramuntana-dreamscape-mobile.webp",
   "public/assets/hero/mallorca-tramuntana-dreamscape.webp",
+  "public/assets/alsace/thann-autumn-hero.jpg",
   "public/assets/mallorca-topographic-map.png",
   "public/assets/routes/stage-1-map.jpg",
   "public/assets/routes/stage-1-profile.png",

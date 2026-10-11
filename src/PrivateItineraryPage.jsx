@@ -23,6 +23,7 @@ import { WeatherPanel } from "./WeatherPanel.jsx";
 const baseUrl = import.meta.env.BASE_URL;
 const packingPageUrl = `${baseUrl}packing/`;
 const itineraryPageUrl = `${baseUrl}itinerary/`;
+const alsacePageUrl = `${baseUrl}alsace/`;
 const payloadUrl = `${baseUrl}assets/private/payload.v2.json`;
 const heroDesktopUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape.webp`;
 const heroMobileUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
@@ -518,6 +519,7 @@ export function PrivateItineraryPage() {
           <a href={baseUrl}>Routes</a>
           <a href={packingPageUrl}>Packing</a>
           <a href={itineraryPageUrl} aria-current="page">Trip</a>
+          <a href={alsacePageUrl}>Alsace</a>
           <a href={`${baseUrl}#sources`}>Sources</a>
         </div>
       </nav>

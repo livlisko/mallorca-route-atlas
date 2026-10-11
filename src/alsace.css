@@ -1,0 +1,1681 @@
+.alsace-lock-page,
+.alsace-guide-page {
+  min-height: 100vh;
+  background: #edf1e7;
+  color: #123f3b;
+}
+
+.alsace-lock-page .topbar,
+.alsace-guide-page .topbar {
+  color: #fff;
+}
+
+.alsace-topbar .topbar__links a[aria-current="page"] {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.alsace-lock-hero {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  align-items: center;
+  gap: clamp(36px, 7vw, 110px);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 450px);
+  overflow: hidden;
+  padding: 145px max(36px, calc((100vw - var(--page-width)) / 2)) 70px;
+  color: #fff;
+}
+
+.alsace-lock-hero__visual,
+.alsace-lock-hero__veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alsace-lock-hero__visual {
+  object-fit: cover;
+  object-position: 52% center;
+}
+
+.alsace-lock-hero__veil {
+  background:
+    linear-gradient(90deg, rgba(4, 43, 48, 0.82) 0%, rgba(8, 54, 54, 0.54) 48%, rgba(4, 38, 43, 0.56) 100%),
+    linear-gradient(180deg, rgba(3, 32, 45, 0.12), rgba(7, 44, 37, 0.72));
+}
+
+.alsace-lock-hero__copy,
+.alsace-unlock-card {
+  position: relative;
+  z-index: 2;
+}
+
+.alsace-lock-hero__copy > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.alsace-lock-hero__copy h1 {
+  max-width: 660px;
+  margin: 24px 0 18px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(72px, 9vw, 130px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+}
+
+.alsace-lock-hero__copy p {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.45;
+}
+
+.alsace-lock-hero__copy > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 32px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.alsace-unlock-card {
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  background: rgba(255, 250, 241, 0.96);
+  box-shadow: 0 30px 90px rgba(4, 31, 30, 0.36);
+  color: #143f3d;
+  backdrop-filter: blur(18px);
+}
+
+.alsace-unlock-card__icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 16px;
+  background: #dceee7;
+  color: #166e63;
+}
+
+.alsace-unlock-card h2 {
+  margin: 22px 0 8px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.alsace-unlock-card > p {
+  margin: 0;
+  color: #57716e;
+  line-height: 1.5;
+}
+
+.alsace-unlock-card__notice {
+  margin-top: 16px !important;
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: #f2e8c5;
+  color: #6d5521 !important;
+  font-size: 14px;
+}
+
+.alsace-unlock-card form {
+  margin-top: 24px;
+}
+
+.alsace-unlock-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.alsace-code-field {
+  display: grid;
+  min-height: 54px;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  border: 1px solid rgba(20, 63, 61, 0.22);
+  border-radius: 15px;
+  background: #fff;
+}
+
+.alsace-code-field > svg {
+  margin-left: 16px;
+  color: #5f7773;
+}
+
+.alsace-code-field input {
+  min-width: 0;
+  height: 52px;
+  border: 0;
+  outline: 0;
+  padding: 0 12px;
+  background: transparent;
+  color: #123f3b;
+  font: 600 17px/1 "Source Sans 3", Arial, sans-serif;
+}
+
+.alsace-code-field__toggle {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #496863;
+  cursor: pointer;
+}
+
+.alsace-unlock-card__error {
+  margin: 10px 0 0 !important;
+  color: #934834 !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.alsace-unlock-card__submit {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+  border: 0;
+  border-radius: 15px;
+  background: #0b4c4a;
+  color: #fff;
+  font: 700 16px/1 "Source Sans 3", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.alsace-unlock-card__submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.alsace-unlock-card__fineprint {
+  margin-top: 17px !important;
+  font-size: 13px;
+  line-height: 1.45 !important;
+}
+
+.alsace-hero {
+  position: relative;
+  display: flex;
+  min-height: 720px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 150px 36px 155px;
+  color: #fff;
+}
+
+.alsace-hero__visual,
+.alsace-hero__veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alsace-hero__visual {
+  object-fit: cover;
+  object-position: center 56%;
+}
+
+.alsace-hero__veil {
+  background:
+    linear-gradient(180deg, rgba(4, 42, 57, 0.46) 0%, rgba(7, 48, 49, 0.36) 45%, rgba(6, 46, 39, 0.82) 100%),
+    linear-gradient(90deg, rgba(5, 45, 50, 0.3), transparent 42%, rgba(4, 40, 43, 0.16));
+}
+
+.alsace-hero__title {
+  position: relative;
+  z-index: 2;
+  width: min(930px, 100%);
+  text-align: center;
+}
+
+.alsace-hero__title h1 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(70px, 8.5vw, 122px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.87;
+  text-wrap: balance;
+}
+
+.alsace-hero__title p {
+  max-width: 660px;
+  margin: 24px auto 0;
+  color: rgba(255, 255, 255, 0.91);
+  font-size: clamp(19px, 2.2vw, 25px);
+  line-height: 1.42;
+}
+
+.alsace-hero__cue {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 9px;
+  margin-top: 32px;
+  padding: 0 22px;
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 999px;
+  background: rgba(9, 59, 59, 0.34);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+}
+
+.alsace-hero__facts {
+  position: absolute;
+  z-index: 2;
+  bottom: 34px;
+  left: 50%;
+  display: flex;
+  width: min(calc(100% - 72px), 850px);
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 18px;
+  background: rgba(6, 43, 45, 0.48);
+  transform: translateX(-50%);
+  backdrop-filter: blur(14px);
+}
+
+.alsace-hero__facts span {
+  display: flex;
+  min-height: 68px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 15px;
+}
+
+.alsace-hero__facts span:first-child {
+  border-left: 0;
+}
+
+.alsace-hero__facts strong {
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 21px;
+}
+
+.alsace-content {
+  width: min(calc(100% - 48px), var(--page-width));
+  min-height: 700px;
+  margin: -1px auto 0;
+  padding: 36px 0 100px;
+}
+
+.alsace-content__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.alsace-content__topline p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #5c716f;
+  font-size: 14px;
+}
+
+.alsace-content__topline button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: #2d615d;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.alsace-event {
+  display: grid;
+  align-items: center;
+  gap: 24px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 28px;
+  border: 1px solid rgba(132, 75, 43, 0.24);
+  border-radius: 26px;
+  background: #fff5df;
+  box-shadow: 0 16px 42px rgba(24, 68, 60, 0.08);
+}
+
+.alsace-event__calendar {
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+  border-radius: 23px;
+  background: #ba5a3a;
+  color: #fff;
+}
+
+.alsace-event__calendar small {
+  margin-top: -18px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.alsace-event__label {
+  color: #9b4a30;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.alsace-event h2 {
+  margin: 5px 0 5px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.alsace-event p {
+  max-width: 760px;
+  margin: 0;
+  color: #556d69;
+  line-height: 1.5;
+}
+
+.alsace-event__meta {
+  display: block;
+  margin-top: 9px;
+  color: #274f4a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.alsace-event__action {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #123f3b;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.alsace-view-nav {
+  position: sticky;
+  z-index: 20;
+  top: 16px;
+  display: grid;
+  width: min(690px, 100%);
+  grid-template-columns: repeat(3, 1fr);
+  margin: 38px auto;
+  padding: 6px;
+  border: 1px solid rgba(20, 63, 61, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 252, 246, 0.94);
+  box-shadow: 0 12px 36px rgba(17, 62, 56, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.alsace-view-nav button {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #59716e;
+  font: 700 16px/1 "Source Sans 3", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.alsace-view-nav button.is-active {
+  background: #0b4c4a;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(10, 64, 60, 0.2);
+}
+
+.alsace-view {
+  min-height: 520px;
+}
+
+.alsace-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.alsace-section-heading h2 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(48px, 6vw, 78px);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.alsace-section-heading p {
+  max-width: 650px;
+  margin: 9px 0 0;
+  color: #5b716e;
+  font-size: 17px;
+}
+
+.alsace-section-heading > span {
+  color: #59706d;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.alsace-filters {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding: 4px 2px 17px;
+  scrollbar-width: none;
+}
+
+.alsace-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.alsace-filters button {
+  min-height: 42px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(20, 63, 61, 0.18);
+  border-radius: 999px;
+  padding: 0 16px;
+  background: #fffaf2;
+  color: #355c58;
+  font: 700 14px/1 "Source Sans 3", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.alsace-filters button span {
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+.alsace-filters button.is-active {
+  border-color: #0b4c4a;
+  background: #dceee7;
+  color: #0b4c4a;
+  box-shadow: inset 0 -3px 0 var(--category-color, #ba5a3a);
+}
+
+.alsace-place-list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.alsace-place-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(20, 63, 61, 0.15);
+  border-radius: 22px;
+  background: #fffaf3;
+  box-shadow: 0 10px 30px rgba(22, 67, 60, 0.07);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.alsace-place-card:hover {
+  border-color: rgba(20, 63, 61, 0.3);
+  box-shadow: 0 18px 40px rgba(22, 67, 60, 0.12);
+  transform: translateY(-2px);
+}
+
+.alsace-place-card > button {
+  display: grid;
+  width: 100%;
+  min-height: 194px;
+  align-items: start;
+  gap: 17px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  border: 0;
+  padding: 22px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.alsace-place-card__icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--category-color, #0b7185) 16%, #fff);
+  color: var(--category-color, #0b7185);
+}
+
+.alsace-place-card__body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.alsace-place-card__locality {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #73827f;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.alsace-place-card__body > strong {
+  margin-top: 5px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+.alsace-place-card__summary {
+  margin-top: 9px;
+  color: #526d69;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.alsace-place-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+  color: #486561;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.alsace-place-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.alsace-place-card__arrow {
+  align-self: center;
+  color: #54716d;
+}
+
+.alsace-place-card--compact {
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.alsace-place-card--compact > button {
+  min-height: 102px;
+  align-items: center;
+  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 14px;
+}
+
+.alsace-place-card--compact .alsace-place-card__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+}
+
+.alsace-place-card--compact .alsace-place-card__body > strong {
+  font-size: 21px;
+}
+
+.alsace-place-card--compact .alsace-place-card__meta {
+  margin-top: 8px;
+}
+
+.alsace-map-layout {
+  display: grid;
+  align-items: stretch;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.85fr);
+}
+
+.alsace-map-frame {
+  overflow: hidden;
+  border: 1px solid rgba(20, 63, 61, 0.18);
+  border-radius: 26px;
+  background: #dceae3;
+  box-shadow: 0 18px 45px rgba(20, 63, 61, 0.12);
+}
+
+.alsace-map {
+  width: 100%;
+  height: 660px;
+  background: #dceae3;
+  font-family: "Source Sans 3", Arial, sans-serif;
+}
+
+.alsace-map--loading {
+  display: grid;
+  place-items: center;
+  color: #58716d;
+  font-weight: 700;
+}
+
+.alsace-map-disclosure {
+  margin: 0;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(20, 63, 61, 0.12);
+  background: #fffaf2;
+  color: #60736f;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.alsace-map-list {
+  display: flex;
+  height: 704px;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.alsace-map-list .alsace-place-card {
+  flex: 0 0 auto;
+}
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.leaflet-container {
+  overflow: hidden;
+  outline-offset: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.leaflet-container .leaflet-overlay-pane svg {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+  width: auto;
+  max-width: none !important;
+  max-height: none !important;
+  padding: 0;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+  touch-action: pan-x pan-y;
+}
+
+.leaflet-container.leaflet-touch-drag {
+  touch-action: pinch-zoom;
+}
+
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  touch-action: none;
+}
+
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.leaflet-tile {
+  filter: inherit;
+  visibility: hidden;
+}
+
+.leaflet-tile::selection {
+  background: transparent;
+}
+
+.leaflet-tile-loaded {
+  visibility: inherit;
+}
+
+.leaflet-zoom-animated {
+  transform-origin: 0 0;
+}
+
+.leaflet-zoom-box {
+  z-index: 800;
+  width: 0;
+  height: 0;
+  box-sizing: border-box;
+}
+
+.leaflet-pane { z-index: 400; }
+.leaflet-tile-pane { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane { z-index: 500; }
+.leaflet-marker-pane { z-index: 600; }
+.leaflet-tooltip-pane { z-index: 650; }
+.leaflet-popup-pane { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg { z-index: 200; }
+
+.leaflet-control {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 800;
+  pointer-events: auto;
+}
+
+.leaflet-right .leaflet-control { float: right; }
+
+.leaflet-interactive,
+.leaflet-grab {
+  cursor: grab;
+}
+
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive {
+  cursor: grabbing;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.leaflet-top { top: 0; }
+.leaflet-right { right: 0; }
+.leaflet-bottom { bottom: 0; }
+.leaflet-left { left: 0; }
+
+.leaflet-control-zoom {
+  overflow: hidden;
+  margin: 0 14px 14px 0;
+  border: 1px solid rgba(20, 63, 61, 0.2);
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(20, 63, 61, 0.15);
+}
+
+.leaflet-control-zoom a {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-bottom: 1px solid rgba(20, 63, 61, 0.15);
+  color: #123f3b;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.leaflet-control-zoom a:last-child { border-bottom: 0; }
+
+.leaflet-control-attribution {
+  margin: 0 !important;
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #4f6662;
+  font-size: 10px;
+}
+
+.leaflet-control-attribution a { color: #1b625b; }
+
+.alsace-map-marker-shell {
+  border: 0;
+  background: transparent;
+}
+
+.alsace-map-marker {
+  position: relative;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 4px solid #fff;
+  border-radius: 50% 50% 50% 8px;
+  background: var(--marker-color);
+  box-shadow: 0 5px 15px rgba(13, 53, 49, 0.28);
+  transform: rotate(-45deg);
+}
+
+.alsace-map-marker i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.leaflet-popup {
+  position: absolute;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.leaflet-popup-content-wrapper {
+  min-width: 220px;
+  border-radius: 16px;
+  background: #fffaf2;
+  box-shadow: 0 16px 38px rgba(15, 56, 51, 0.22);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 16px;
+  text-align: left;
+}
+
+.leaflet-popup-tip-container {
+  width: 40px;
+  height: 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.leaflet-popup-tip {
+  width: 17px;
+  height: 17px;
+  margin: -10px auto 0;
+  background: #fffaf2;
+  box-shadow: 3px 3px 8px rgba(15, 56, 51, 0.12);
+  transform: rotate(45deg);
+}
+
+.alsace-map-popup {
+  display: flex;
+  flex-direction: column;
+}
+
+.alsace-map-popup span {
+  color: #71817e;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.alsace-map-popup strong {
+  margin-top: 3px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.alsace-map-popup p {
+  margin: 7px 0 0;
+  color: #546c68;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.alsace-day-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.alsace-day-plan {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 68px minmax(230px, 0.8fr) minmax(0, 1.3fr);
+  padding: 30px;
+  border: 1px solid rgba(20, 63, 61, 0.16);
+  border-radius: 26px;
+  background: #fffaf3;
+  box-shadow: 0 14px 38px rgba(20, 63, 61, 0.08);
+}
+
+.alsace-day-plan__number {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 18px;
+  background: #0b7185;
+  color: #fff;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.alsace-day-plan__intro > span {
+  color: #a34f35;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.alsace-day-plan h2 {
+  margin: 5px 0 9px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.alsace-day-plan p {
+  margin: 0;
+  color: #5c716e;
+  line-height: 1.5;
+}
+
+.alsace-day-plan ol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alsace-day-plan li button {
+  display: grid;
+  width: 100%;
+  min-height: 64px;
+  align-items: center;
+  gap: 13px;
+  grid-template-columns: auto 1fr auto;
+  border: 0;
+  border-radius: 15px;
+  padding: 10px 13px;
+  background: #edf3ea;
+  color: #123f3b;
+  text-align: left;
+  cursor: pointer;
+}
+
+.alsace-day-plan li button > span:first-child {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 10px;
+  background: #d4e8df;
+  color: #1c625a;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-weight: 700;
+}
+
+.alsace-day-plan li button > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.alsace-day-plan li small {
+  color: #71817e;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.alsace-day-plan li strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alsace-dialog-backdrop {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 24px;
+  background: rgba(6, 36, 37, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.alsace-dialog {
+  position: relative;
+  width: min(720px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 30px;
+  padding: 40px;
+  background: #fffaf3;
+  box-shadow: 0 32px 100px rgba(2, 28, 28, 0.42);
+}
+
+.alsace-dialog__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(20, 63, 61, 0.16);
+  border-radius: 50%;
+  background: #fff;
+  color: #123f3b;
+  cursor: pointer;
+}
+
+.alsace-dialog__header > span {
+  color: #a44f34;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.alsace-dialog h2 {
+  max-width: calc(100% - 50px);
+  margin: 7px 0 14px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.alsace-dialog__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.alsace-dialog__categories span {
+  border: 1px solid color-mix(in srgb, var(--category-color) 35%, transparent);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: color-mix(in srgb, var(--category-color) 12%, #fff);
+  color: #294f4b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.alsace-dialog__why {
+  margin: 27px 0;
+  color: #385c58;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 23px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.alsace-dialog__facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(20, 63, 61, 0.14);
+  border-radius: 18px;
+}
+
+.alsace-dialog__facts div {
+  padding: 16px;
+  border-top: 1px solid rgba(20, 63, 61, 0.12);
+  border-left: 1px solid rgba(20, 63, 61, 0.12);
+}
+
+.alsace-dialog__facts div:nth-child(-n + 2) { border-top: 0; }
+.alsace-dialog__facts div:nth-child(odd) { border-left: 0; }
+
+.alsace-dialog__facts dt {
+  color: #74827f;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.alsace-dialog__facts dd {
+  margin: 3px 0 0;
+  color: #123f3b;
+  font-weight: 700;
+}
+
+.alsace-dialog__status {
+  margin-top: 18px;
+  padding: 16px;
+  border-left: 4px solid #0b7185;
+  border-radius: 4px 14px 14px 4px;
+  background: #e8f1ed;
+}
+
+.alsace-dialog__status--weather { border-color: #d89b36; background: #fff2d7; }
+.alsace-dialog__status--reserve { border-color: #b55b3d; background: #fae8df; }
+.alsace-dialog__status--check { border-color: #6c7e99; background: #edf0f4; }
+
+.alsace-dialog__status p {
+  margin: 4px 0 0;
+  color: #526b67;
+  line-height: 1.45;
+}
+
+.alsace-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.alsace-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 0 17px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.alsace-button--primary { background: #0b4c4a; color: #fff; }
+.alsace-button--secondary { border: 1px solid rgba(20, 63, 61, 0.2); background: #fff; color: #245854; }
+
+.alsace-footer {
+  display: flex;
+  min-height: 90px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px max(24px, calc((100vw - var(--page-width)) / 2));
+  background: #0d3f3d;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+}
+
+.alsace-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .alsace-lock-hero {
+    grid-template-columns: 1fr;
+    padding: 130px 32px 48px;
+  }
+
+  .alsace-lock-hero__copy {
+    align-self: end;
+  }
+
+  .alsace-lock-hero__copy h1 {
+    font-size: clamp(64px, 16vw, 100px);
+  }
+
+  .alsace-unlock-card {
+    justify-self: end;
+    width: min(470px, 100%);
+  }
+
+  .alsace-event {
+    grid-template-columns: auto 1fr;
+  }
+
+  .alsace-event__action {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .alsace-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .alsace-map-list {
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .alsace-day-plan {
+    grid-template-columns: 58px 1fr;
+  }
+
+  .alsace-day-plan ol {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .alsace-lock-page .topbar,
+  .alsace-guide-page .topbar {
+    width: calc(100% - 36px);
+    min-height: 76px;
+  }
+
+  .alsace-lock-page .wordmark small,
+  .alsace-guide-page .wordmark small {
+    display: none;
+  }
+
+  .alsace-lock-page .topbar__links,
+  .alsace-guide-page .topbar__links {
+    gap: 1px;
+  }
+
+  .alsace-lock-page .topbar__links a,
+  .alsace-guide-page .topbar__links a {
+    min-height: 37px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .alsace-lock-page .topbar__links a:first-child,
+  .alsace-guide-page .topbar__links a:first-child {
+    display: none;
+  }
+
+  .alsace-lock-page .topbar__links a:last-child,
+  .alsace-guide-page .topbar__links a:last-child {
+    display: inline-flex;
+  }
+
+  .alsace-lock-hero {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 112px 18px 24px;
+  }
+
+  .alsace-lock-hero__visual {
+    object-position: 61% center;
+  }
+
+  .alsace-lock-hero__veil {
+    background: linear-gradient(180deg, rgba(4, 41, 48, 0.32) 0%, rgba(4, 43, 42, 0.62) 45%, rgba(3, 37, 36, 0.93) 100%);
+  }
+
+  .alsace-lock-hero__copy {
+    width: 100%;
+  }
+
+  .alsace-lock-hero__copy h1 {
+    margin: 14px 0 10px;
+    font-size: 58px;
+  }
+
+  .alsace-lock-hero__copy p {
+    font-size: 17px;
+  }
+
+  .alsace-lock-hero__copy > a {
+    display: none;
+  }
+
+  .alsace-unlock-card {
+    width: 100%;
+    padding: 24px;
+    border-radius: 23px;
+  }
+
+  .alsace-unlock-card h2 {
+    margin-top: 15px;
+    font-size: 32px;
+  }
+
+  .alsace-hero {
+    min-height: 620px;
+    align-items: flex-end;
+    padding: 120px 20px 160px;
+  }
+
+  .alsace-hero__visual {
+    object-position: 58% center;
+  }
+
+  .alsace-hero__title {
+    text-align: left;
+  }
+
+  .alsace-hero__title h1 {
+    font-size: clamp(60px, 18vw, 82px);
+  }
+
+  .alsace-hero__title p {
+    margin: 17px 0 0;
+    font-size: 18px;
+  }
+
+  .alsace-hero__cue {
+    margin-top: 23px;
+  }
+
+  .alsace-hero__facts {
+    bottom: 24px;
+    width: calc(100% - 36px);
+    border-radius: 15px;
+  }
+
+  .alsace-hero__facts span {
+    min-height: 62px;
+    flex-direction: column;
+    gap: 1px;
+    padding: 9px 5px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .alsace-hero__facts strong {
+    font-size: 18px;
+  }
+
+  .alsace-content {
+    width: calc(100% - 28px);
+    padding: 24px 0 112px;
+  }
+
+  .alsace-content__topline {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .alsace-event {
+    gap: 16px;
+    grid-template-columns: 58px 1fr;
+    padding: 19px;
+    border-radius: 21px;
+  }
+
+  .alsace-event__calendar {
+    width: 58px;
+    height: 64px;
+    border-radius: 17px;
+  }
+
+  .alsace-event__calendar svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .alsace-event__calendar small {
+    margin-top: -13px;
+    font-size: 9px;
+  }
+
+  .alsace-event h2 {
+    font-size: 27px;
+  }
+
+  .alsace-event p {
+    font-size: 14px;
+  }
+
+  .alsace-event__action {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: center;
+  }
+
+  .alsace-view-nav {
+    display: none;
+  }
+
+  .alsace-section-heading {
+    align-items: start;
+    flex-direction: column;
+    margin: 34px 0 18px;
+  }
+
+  .alsace-section-heading h2 {
+    font-size: 54px;
+  }
+
+  .alsace-section-heading p {
+    font-size: 15px;
+  }
+
+  .alsace-place-list,
+  .alsace-map-list {
+    grid-template-columns: 1fr;
+  }
+
+  .alsace-place-card > button {
+    min-height: 0;
+    gap: 13px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 17px;
+  }
+
+  .alsace-place-card__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .alsace-place-card__body > strong {
+    font-size: 25px;
+  }
+
+  .alsace-place-card__summary {
+    font-size: 14px;
+  }
+
+  .alsace-map {
+    height: 480px;
+  }
+
+  .alsace-map-list {
+    display: flex;
+  }
+
+  .alsace-day-plan {
+    gap: 15px;
+    grid-template-columns: 48px 1fr;
+    padding: 20px;
+    border-radius: 21px;
+  }
+
+  .alsace-day-plan__number {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    font-size: 18px;
+  }
+
+  .alsace-day-plan h2 {
+    font-size: 28px;
+  }
+
+  .alsace-day-plan ol {
+    grid-column: 1 / -1;
+  }
+
+  .alsace-dialog-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .alsace-dialog {
+    width: 100%;
+    max-height: 90svh;
+    border-radius: 28px 28px 0 0;
+    padding: 30px 20px 36px;
+  }
+
+  .alsace-dialog__close {
+    top: 14px;
+    right: 14px;
+  }
+
+  .alsace-dialog h2 {
+    font-size: 42px;
+  }
+
+  .alsace-dialog__why {
+    font-size: 20px;
+  }
+
+  .alsace-dialog__facts {
+    grid-template-columns: 1fr;
+  }
+
+  .alsace-dialog__facts div,
+  .alsace-dialog__facts div:nth-child(-n + 2),
+  .alsace-dialog__facts div:nth-child(odd) {
+    border-top: 1px solid rgba(20, 63, 61, 0.12);
+    border-left: 0;
+  }
+
+  .alsace-dialog__facts div:first-child {
+    border-top: 0;
+  }
+
+  .alsace-dialog__actions {
+    flex-direction: column;
+  }
+
+  .alsace-footer {
+    align-items: start;
+    flex-direction: column;
+    padding-bottom: 104px;
+  }
+
+  .alsace-mobile-nav {
+    position: fixed;
+    z-index: 1500;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 6px;
+    border: 1px solid rgba(20, 63, 61, 0.16);
+    border-radius: 22px;
+    background: rgba(255, 252, 246, 0.96);
+    box-shadow: 0 14px 40px rgba(7, 44, 42, 0.22);
+    backdrop-filter: blur(16px);
+  }
+
+  .alsace-mobile-nav button {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-direction: column;
+    border: 0;
+    border-radius: 17px;
+    background: transparent;
+    color: #657975;
+    font: 700 11px/1 "Source Sans 3", Arial, sans-serif;
+  }
+
+  .alsace-mobile-nav button.is-active {
+    background: #e0eee7;
+    color: #0b4c4a;
+  }
+}
+
+@media (max-width: 380px) {
+  .alsace-lock-page .topbar__links a,
+  .alsace-guide-page .topbar__links a {
+    padding: 0 8px;
+  }
+
+  .alsace-lock-page .wordmark strong,
+  .alsace-guide-page .wordmark strong {
+    font-size: 21px;
+  }
+
+  .alsace-lock-hero__copy h1 {
+    font-size: 50px;
+  }
+
+  .alsace-unlock-card {
+    padding: 20px;
+  }
+
+  .alsace-hero__facts span:last-child {
+    display: none;
+  }
+
+  .alsace-place-card__icon {
+    display: none;
+  }
+
+  .alsace-place-card > button {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alsace-place-card {
+    transition: none;
+  }
+}

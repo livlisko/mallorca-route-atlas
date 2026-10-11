@@ -38,6 +38,7 @@ const baseUrl = import.meta.env.BASE_URL;
 const heroDesktopUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape.webp`;
 const heroMobileUrl = `${baseUrl}assets/hero/mallorca-tramuntana-dreamscape-mobile.webp`;
 const itineraryPageUrl = `${baseUrl}itinerary/`;
+const alsacePageUrl = `${baseUrl}alsace/`;
 const packingItemIds = packingGroups.flatMap((group) => group.items.map((item) => item.id));
 const prepItemIds = prepSteps.map((step) => step.id);
 
@@ -138,6 +139,7 @@ export function PackingPage() {
             Packing
           </a>
           <a href={itineraryPageUrl}>Trip</a>
+          <a href={alsacePageUrl}>Alsace</a>
           <a href={`${baseUrl}#sources`}>Sources</a>
         </div>
       </nav>
