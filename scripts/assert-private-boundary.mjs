@@ -3,6 +3,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { ALSACE_PLACE_PHOTO_ASSETS } from "../src/alsaceCrypto.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pdfSignature = String.fromCharCode(37, 80, 68, 70, 45);
@@ -11,6 +12,7 @@ const approvedImageFiles = new Set([
   "public/assets/hero/mallorca-tramuntana-dreamscape-mobile.webp",
   "public/assets/hero/mallorca-tramuntana-dreamscape.webp",
   "public/assets/alsace/thann-autumn-hero.jpg",
+  ...ALSACE_PLACE_PHOTO_ASSETS.map((asset) => `public/${asset}`),
   "public/assets/mallorca-topographic-map.png",
   "public/assets/routes/stage-1-map.jpg",
   "public/assets/routes/stage-1-profile.png",

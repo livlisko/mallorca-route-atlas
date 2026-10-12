@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
+import { ALSACE_PLACE_PHOTO_ASSETS } from "../src/alsaceCrypto.js";
 import worker from "../worker/index.js";
+
+function assertWebp(buffer, asset) {
+  assert.equal(buffer.subarray(0, 4).toString("ascii"), "RIFF", `${asset} must have a RIFF header`);
+  assert.equal(buffer.subarray(8, 12).toString("ascii"), "WEBP", `${asset} must have a WEBP signature`);
+}
 
 test("serves existing static assets without a fallback", async () => {
   const calls = [];
@@ -68,4 +74,9 @@ test("emits the files required by Sites packaging", async () => {
   await access(new URL("../dist/client/alsace/index.html", import.meta.url));
   await access(new URL("../dist/server/index.js", import.meta.url));
   await access(new URL("../dist/.openai/hosting.json", import.meta.url));
+
+  for (const asset of ALSACE_PLACE_PHOTO_ASSETS) {
+    const contents = await readFile(new URL(`../dist/client/${asset}`, import.meta.url));
+    assertWebp(contents, asset);
+  }
 });

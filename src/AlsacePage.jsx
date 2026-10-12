@@ -63,6 +63,23 @@ const statusLabels = {
   check: "Check before going",
 };
 
+function formatDriveEstimate(place) {
+  const miles = (place.driveDistanceKm * 0.621371).toFixed(1);
+  return `≈ ${place.driveDistanceKm} km / ${miles} mi · ${place.driveMinutes} min`;
+}
+
+function PlacePhoto({ place, className = "alsace-place-card__photo" }) {
+  const { photo } = place;
+  const isRangenTasting = place.id === "maison-rangen";
+  return (
+    <span className={className}>
+      <img src={`${baseUrl}${photo.asset}`} alt={photo.alt} loading="lazy" decoding="async" />
+      {isRangenTasting ? <span className="alsace-place-card__photo-note">Rangen vineyard behind the tasting</span> : null}
+      <span className="alsace-place-card__photo-credit">Photo: {photo.credit} · {photo.license} · cropped</span>
+    </span>
+  );
+}
+
 function useAutoLock(isUnlocked, onLock) {
   useEffect(() => {
     if (!isUnlocked) return undefined;
@@ -252,15 +269,17 @@ function PlaceCard({ place, categories, onOpen, compact = false }) {
   return (
     <article className={`alsace-place-card${compact ? " alsace-place-card--compact" : ""}`}>
       <button type="button" onClick={() => onOpen(place.id)}>
-        <span className="alsace-place-card__icon" style={{ "--category-color": category?.color }}>
-          <Icon aria-hidden="true" size={25} weight="duotone" />
-        </span>
+        {compact ? (
+          <span className="alsace-place-card__icon" style={{ "--category-color": category?.color }}>
+            <Icon aria-hidden="true" size={25} weight="duotone" />
+          </span>
+        ) : <PlacePhoto place={place} />}
         <span className="alsace-place-card__body">
           <span className="alsace-place-card__locality"><MapPin aria-hidden="true" size={14} weight="fill" />{place.locality}</span>
           <strong>{place.title}</strong>
           {!compact ? <span className="alsace-place-card__summary">{place.summary}</span> : null}
           <span className="alsace-place-card__meta">
-            <span><CarProfile aria-hidden="true" size={16} />{place.driveMinutes === 0 ? "In town" : `≈ ${place.driveMinutes} min`}</span>
+            <span><CarProfile aria-hidden="true" size={16} />{formatDriveEstimate(place)}</span>
             <span><Clock aria-hidden="true" size={16} />{place.duration}</span>
           </span>
         </span>
@@ -337,9 +356,19 @@ function PlaceDialog({ place, categories, onClose }) {
             {placeCategories.map((category) => <span key={category.id} style={{ "--category-color": category.color }}>{category.label}</span>)}
           </div>
         </div>
+        <figure className="alsace-dialog__photo">
+          <img src={`${baseUrl}${place.photo.asset}`} alt={place.photo.alt} decoding="async" />
+          <figcaption>
+            <span className="alsace-dialog__photo-copy">
+              {place.id === "maison-rangen" ? <strong>Exact Rangen Grand Cru vineyard—the wines behind this tasting stop. No openly licensed photo of the private tasting space was available.</strong> : null}
+              <span>Photo: {place.photo.credit} · {place.photo.license} · cropped</span>
+            </span>
+            <ExternalLink href={place.photo.sourceUrl} className="alsace-dialog__photo-link">Photo source</ExternalLink>
+          </figcaption>
+        </figure>
         <p className="alsace-dialog__why">{place.why}</p>
         <dl className="alsace-dialog__facts">
-          <div><dt>From Thann</dt><dd>{place.driveMinutes === 0 ? "Walkable" : `≈ ${place.driveMinutes} min by car`}</dd></div>
+          <div><dt>Drive from your base</dt><dd>{formatDriveEstimate(place)} by car</dd></div>
           <div><dt>Time</dt><dd>{place.duration}</dd></div>
           <div><dt>Effort</dt><dd>{place.effort}</dd></div>
           <div><dt>Best weather</dt><dd>{place.weather}</dd></div>
@@ -459,7 +488,7 @@ function Guide({ guide, onLock }) {
 
       <main className="alsace-content" id="alsace-guide">
         <div className="alsace-content__topline">
-          <p><ShieldWarning aria-hidden="true" size={18} weight="duotone" /> Hours and mountain-road access can change. Recheck the linked source before leaving.</p>
+          <p><ShieldWarning aria-hidden="true" size={18} weight="duotone" /> Drive estimates start at your trip base and are rounded without live traffic. Recheck hours and mountain-road access before leaving.</p>
           <button type="button" onClick={() => onLock("manual")}><SignOut aria-hidden="true" size={18} />Lock guide</button>
         </div>
 

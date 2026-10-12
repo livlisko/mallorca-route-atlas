@@ -4,6 +4,11 @@ const textDecoder = new TextDecoder("utf-8", { fatal: true });
 export const ALSACE_CONTEXT = "mallorca-route-atlas/private-alsace/v1";
 export const PBKDF2_ITERATIONS = 600_000;
 export const MIN_ALSACE_CODE_LENGTH = 6;
+export const ALSACE_PLACE_PHOTO_ASSETS = Object.freeze(
+  Array.from({ length: 15 }, (_, index) => `assets/alsace/places/p${String(index + 1).padStart(2, "0")}.webp`),
+);
+
+const ALSACE_PLACE_PHOTO_ASSET_SET = new Set(ALSACE_PLACE_PHOTO_ASSETS);
 
 const SOURCE_HOSTS = new Set([
   "visit.alsace",
@@ -23,6 +28,7 @@ const SOURCE_HOSTS = new Set([
   "musee-unterlinden.com",
   "citedutrain.com",
   "musee-automobile.fr",
+  "commons.wikimedia.org",
 ]);
 
 const PLACE_STATUSES = new Set(["open", "weather", "reserve", "check"]);
@@ -106,8 +112,16 @@ function assertSourceUrl(value, path) {
 function assertBase(value, path) {
   assertExactKeys(value, ["label", "latitude", "longitude"], path);
   assertString(value.label, `${path}.label`, { max: 100 });
+  if (/(?:\d|\b(?:hotel|hôtel|hostel|inn|lodging|address|domaine|rue|street|avenue|boulevard|route|road|chemin)\b)/i.test(value.label)) {
+    throw new TypeError(`${path}.label must identify only a coarse base area.`);
+  }
   assertFiniteNumber(value.latitude, `${path}.latitude`, -90, 90);
   assertFiniteNumber(value.longitude, `${path}.longitude`, -180, 180);
+  for (const coordinate of [value.latitude, value.longitude]) {
+    if (Math.abs(coordinate * 100 - Math.round(coordinate * 100)) > 1e-8) {
+      throw new TypeError(`${path} coordinates must be rounded to a coarse base area.`);
+    }
+  }
 }
 
 function assertCategory(value, path) {
@@ -131,6 +145,18 @@ function assertSources(value, path) {
   value.forEach((source, index) => assertSource(source, `${path}[${index}]`));
 }
 
+function assertPhoto(value, path) {
+  assertExactKeys(value, ["asset", "alt", "credit", "license", "sourceUrl"], path);
+  assertString(value.asset, `${path}.asset`, { max: 100 });
+  if (!ALSACE_PLACE_PHOTO_ASSET_SET.has(value.asset)) {
+    throw new TypeError(`${path}.asset must be an approved local place photo.`);
+  }
+  assertString(value.alt, `${path}.alt`, { max: 220 });
+  assertString(value.credit, `${path}.credit`, { max: 140 });
+  assertString(value.license, `${path}.license`, { max: 64 });
+  assertSourceUrl(value.sourceUrl, `${path}.sourceUrl`);
+}
+
 function assertPlace(value, path) {
   assertExactKeys(
     value,
@@ -143,6 +169,8 @@ function assertPlace(value, path) {
       "categories",
       "latitude",
       "longitude",
+      "photo",
+      "driveDistanceKm",
       "driveMinutes",
       "duration",
       "effort",
@@ -167,6 +195,10 @@ function assertPlace(value, path) {
   }
   assertFiniteNumber(value.latitude, `${path}.latitude`, -90, 90);
   assertFiniteNumber(value.longitude, `${path}.longitude`, -180, 180);
+  assertPhoto(value.photo, `${path}.photo`);
+  if (!Number.isInteger(value.driveDistanceKm) || value.driveDistanceKm < 0 || value.driveDistanceKm > 1000) {
+    throw new TypeError(`${path}.driveDistanceKm must be a supported integer.`);
+  }
   if (!Number.isInteger(value.driveMinutes) || value.driveMinutes < 0 || value.driveMinutes > 600) {
     throw new TypeError(`${path}.driveMinutes must be a supported integer.`);
   }

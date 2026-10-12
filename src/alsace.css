@@ -589,6 +589,72 @@
   cursor: pointer;
 }
 
+.alsace-place-card:not(.alsace-place-card--compact) > button {
+  min-height: 280px;
+  align-items: stretch;
+  gap: 0;
+  grid-template-columns: minmax(190px, 42%) minmax(0, 1fr) auto;
+  padding: 0;
+}
+
+.alsace-place-card__photo {
+  position: relative;
+  display: block;
+  min-height: 280px;
+  overflow: hidden;
+  background: #d9e7df;
+}
+
+.alsace-place-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.alsace-place-card:hover .alsace-place-card__photo img,
+.alsace-place-card:focus-within .alsace-place-card__photo img {
+  transform: scale(1.035);
+}
+
+.alsace-place-card__photo-credit,
+.alsace-place-card__photo-note {
+  position: absolute;
+  right: 9px;
+  left: 9px;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 5px 7px;
+  background: rgba(5, 35, 34, 0.78);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alsace-place-card__photo-credit {
+  bottom: 9px;
+}
+
+.alsace-place-card__photo-note {
+  top: 9px;
+  right: auto;
+  width: max-content;
+  max-width: calc(100% - 18px);
+  background: rgba(163, 79, 53, 0.92);
+  font-weight: 700;
+}
+
+.alsace-place-card:not(.alsace-place-card--compact) .alsace-place-card__body {
+  justify-content: center;
+  padding: 24px 18px 24px 22px;
+}
+
+.alsace-place-card:not(.alsace-place-card--compact) .alsace-place-card__arrow {
+  margin-right: 18px;
+}
+
 .alsace-place-card__icon {
   display: grid;
   width: 48px;
@@ -914,6 +980,21 @@
   background: #fff;
 }
 
+.alsace-map-marker--base {
+  width: 38px;
+  height: 38px;
+  border-color: #fffaf2;
+  background: #123f3b;
+  box-shadow: 0 6px 18px rgba(13, 53, 49, 0.38);
+}
+
+.alsace-map-marker--base i {
+  width: 13px;
+  height: 13px;
+  border: 3px solid #fffaf2;
+  background: #ef8e5b;
+}
+
 .leaflet-popup {
   position: absolute;
   margin-bottom: 20px;
@@ -1171,6 +1252,54 @@
   font-size: 23px;
   font-style: italic;
   line-height: 1.45;
+}
+
+.alsace-dialog__photo {
+  margin: 24px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(20, 63, 61, 0.14);
+  border-radius: 20px;
+  background: #e5eee8;
+}
+
+.alsace-dialog__photo > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.alsace-dialog__photo figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 12px;
+  color: #627572;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.alsace-dialog__photo-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alsace-dialog__photo-copy strong {
+  color: #385b56;
+  font-weight: 700;
+}
+
+.alsace-dialog__photo-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  color: #1d625b;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .alsace-dialog__facts {
@@ -1512,6 +1641,32 @@
     padding: 17px;
   }
 
+  .alsace-place-card:not(.alsace-place-card--compact) > button {
+    min-height: 0;
+    align-items: stretch;
+    gap: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0;
+  }
+
+  .alsace-place-card__photo {
+    height: 196px;
+    min-height: 196px;
+    grid-column: 1 / -1;
+  }
+
+  .alsace-place-card:not(.alsace-place-card--compact) .alsace-place-card__body {
+    grid-column: 1;
+    padding: 18px 12px 19px 18px;
+  }
+
+  .alsace-place-card:not(.alsace-place-card--compact) .alsace-place-card__arrow {
+    align-self: center;
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0 16px 0 0;
+  }
+
   .alsace-place-card__icon {
     width: 42px;
     height: 42px;
@@ -1579,6 +1734,12 @@
 
   .alsace-dialog__why {
     font-size: 20px;
+  }
+
+  .alsace-dialog__photo figcaption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .alsace-dialog__facts {

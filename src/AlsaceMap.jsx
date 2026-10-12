@@ -16,6 +16,21 @@ function makePopup(place) {
   return wrap;
 }
 
+function makeBasePopup(base) {
+  const wrap = document.createElement("div");
+  wrap.className = "alsace-map-popup";
+
+  const locality = document.createElement("span");
+  locality.textContent = "Approximate area";
+  const title = document.createElement("strong");
+  title.textContent = base.label;
+  const summary = document.createElement("p");
+  summary.textContent = "Drive estimates begin from your lodging address; this marker is intentionally approximate.";
+
+  wrap.append(locality, title, summary);
+  return wrap;
+}
+
 export function AlsaceMap({ base, places, categories, selectedId, onSelect }) {
   const elementRef = useRef(null);
   const mapRef = useRef(null);
@@ -59,6 +74,21 @@ export function AlsaceMap({ base, places, categories, selectedId, onSelect }) {
     layerRef.current = layer;
     const categoryMap = new Map(categories.map((category) => [category.id, category]));
 
+    const baseMarker = L.marker([base.latitude, base.longitude], {
+      title: `${base.label} (approximate)`,
+      keyboard: true,
+      zIndexOffset: 1000,
+      icon: L.divIcon({
+        className: "alsace-map-marker-shell",
+        html: '<span class="alsace-map-marker alsace-map-marker--base"><i></i></span>',
+        iconSize: [38, 46],
+        iconAnchor: [19, 42],
+        popupAnchor: [0, -38],
+      }),
+    });
+    baseMarker.bindPopup(makeBasePopup(base), { maxWidth: 280, closeButton: false });
+    baseMarker.addTo(layer);
+
     for (const place of places) {
       const primaryCategory = categoryMap.get(place.categories[0]);
       const color = primaryCategory?.color ?? "#0b7185";
@@ -79,16 +109,17 @@ export function AlsaceMap({ base, places, categories, selectedId, onSelect }) {
       markersRef.current.set(place.id, marker);
     }
 
-    if (places.length === 1) {
-      map.setView([places[0].latitude, places[0].longitude], 13, { animate: false });
-    } else if (places.length > 1) {
+    if (places.length > 0) {
       map.fitBounds(
-        L.latLngBounds(places.map((place) => [place.latitude, place.longitude])),
+        L.latLngBounds([
+          [base.latitude, base.longitude],
+          ...places.map((place) => [place.latitude, place.longitude]),
+        ]),
         { padding: [42, 42], maxZoom: 12, animate: false },
       );
     }
     window.requestAnimationFrame(() => map.invalidateSize());
-  }, [categories, onSelect, places]);
+  }, [base, categories, onSelect, places]);
 
   useEffect(() => {
     if (!selectedId) return;

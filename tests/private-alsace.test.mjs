@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   ALSACE_CONTEXT,
+  ALSACE_PLACE_PHOTO_ASSETS,
   decryptPrivateAlsace,
   encryptPrivateAlsace,
   MIN_ALSACE_CODE_LENGTH,
@@ -40,6 +41,14 @@ function samplePayload() {
         categories: ["outdoors"],
         latitude: 47.82,
         longitude: 7.11,
+        photo: {
+          asset: "assets/alsace/places/p01.webp",
+          alt: "A synthetic place photo used only for schema testing.",
+          credit: "Example photographer",
+          license: "CC BY-SA 4.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg",
+        },
+        driveDistanceKm: 11,
         driveMinutes: 15,
         duration: "1–2 hours",
         effort: "Easy",
@@ -155,6 +164,36 @@ test("enforces exact guide shapes, references, statuses, and coordinates", () =>
   const badCoordinate = samplePayload();
   badCoordinate.places[0].latitude = 100;
   assert.throws(() => validatePrivateAlsace(badCoordinate));
+
+  const badDistance = samplePayload();
+  badDistance.places[0].driveDistanceKm = -1;
+  assert.throws(() => validatePrivateAlsace(badDistance));
+
+  const preciseDistance = samplePayload();
+  preciseDistance.places[0].driveDistanceKm = 10.5;
+  assert.throws(() => validatePrivateAlsace(preciseDistance));
+
+  const unsafePhotoAsset = samplePayload();
+  unsafePhotoAsset.places[0].photo.asset = "https://example.com/photo.jpg";
+  assert.throws(() => validatePrivateAlsace(unsafePhotoAsset));
+
+  const unlistedPhotoAsset = samplePayload();
+  unlistedPhotoAsset.places[0].photo.asset = "assets/alsace/places/p99.webp";
+  assert.throws(() => validatePrivateAlsace(unlistedPhotoAsset));
+
+  assert.equal(ALSACE_PLACE_PHOTO_ASSETS.length, 15);
+
+  const unapprovedPhotoSource = samplePayload();
+  unapprovedPhotoSource.places[0].photo.sourceUrl = "https://example.com/photo";
+  assert.throws(() => validatePrivateAlsace(unapprovedPhotoSource));
+
+  const identifyingBaseLabel = samplePayload();
+  identifyingBaseLabel.base.label = "Your hotel at 1 Rue Example";
+  assert.throws(() => validatePrivateAlsace(identifyingBaseLabel));
+
+  const preciseBaseCoordinate = samplePayload();
+  preciseBaseCoordinate.base.latitude = 47.812345;
+  assert.throws(() => validatePrivateAlsace(preciseBaseCoordinate));
 });
 
 test("rejects private-document text and non-allowlisted source URLs", () => {
